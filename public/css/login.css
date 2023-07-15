@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Libre+Franklin&family=Nova+Mono&display=swap');
+
+* {
+    font-family: 'Nova Mono', 'Libre Franklin', sans-serif;
+}
+
+h1, h2, h3, h4, h6 {
+    font-family: 'Arvo', 'Libre Franklin', sans-serif;
+}
+
+body {
+    background-color: moccasin;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+}
+
+.loginContainer {
+    padding: 20px;
+    width: 80%;
+    max-width: 400px;
+    background-color: #fffcf0;
+    border: 2px solid rosybrown;
+    text-align: center;
+    box-shadow: 3px 5px 10px rgba(100,100,100,0.3);
+    -webkit-box-shadow: 3px 5px 10px rgba(100,100,100,0.3);
+    -moz-box-shadow: 3px 5px 10px rgba(100,100,100,0.3);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type='text'], input[type='email'], input[type='password'] {
+    margin: 0 0 20px;
+    padding: 5px 10px;
+    border-radius: 2px;
+    border: 1px solid #dedede;
+}
+
+input[type='submit'] {
+    margin: 0 0 10px;
+    padding: 5px 10px;
+    background-color: moccasin;
+    border: none;
+    border-radius: 2px;
+}
+
+p.signupErrMsg {
+    font-size: 14px;
+}
