@@ -20,6 +20,10 @@ const signupRoute = require('./routes/signupRoute');
 app.use('/login', loginRoute);
 app.use('/signup', signupRoute);
 
+const server = app.listen(port, () =>
+  console.log(`Server listening on port ${port}.`)
+);
+
 app.get('/', middleware.requireLogin, (req, res, next) => {
   const payload = {
     pageTitle: 'Home',
