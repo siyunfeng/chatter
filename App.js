@@ -4,10 +4,8 @@ const port = 3001;
 const middleware = require('./middleware');
 const path = require('path');
 const bodyParser = require('body-parser');
-
-const server = app.listen(port, () => {
-  console.log(`Server listenning on port ${port}`);
-});
+require('dotenv').config();
+const mongoose = require('./db');
 
 app.set('view engine', 'pug');
 app.set('views', 'views');
