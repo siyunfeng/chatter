@@ -50,6 +50,6 @@ input[type='submit'] {
     border-radius: 2px;
 }
 
-p.signupErrMsg {
+p.signupErrMsg, p.loginErrMsg{
     font-size: 14px;
 }

@@ -34,6 +34,7 @@ app.use('/signup', signupRoute);
 app.get('/', middleware.requireLogin, (req, res, next) => {
   const payload = {
     pageTitle: 'Home',
+    loggedInUser: req.session.user,
   };
   res.status(200).render('home', payload);
 });

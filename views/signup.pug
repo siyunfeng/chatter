@@ -6,7 +6,7 @@ block content
         form#signupForm(method="post", onsubmit='event.preventDefault(); validateForm()')
             p.signupErrMsg #{errorMessage || `Let's create a new account!`}
 
-            input(type="text", name="firstName", placeholder="First Name", value=firstName, equired="")
+            input(type="text", name="firstName", placeholder="First Name", value=firstName, required="")
             input(type="text", name="lastName", placeholder="Last Name", value=lastName, required="")
             input(type="text", name="username", placeholder="Username", value=username, required="")
             input(type="email", name="email", placeholder="Email", value=email, required="")
