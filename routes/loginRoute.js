@@ -22,12 +22,6 @@ router.post('/', async (req, res, next) => {
   console.log('req.body =', req.body);
   try {
     const { loginUsernameOrEmail, loginPassword } = req.body;
-    console.log(
-      'loginUsernameOrEmail =',
-      loginUsernameOrEmail,
-      'loginPassword =',
-      loginPassword
-    );
     if (loginUsernameOrEmail && loginPassword) {
       const existingUser = await User.findOne({
         $or: [
@@ -41,7 +35,6 @@ router.post('/', async (req, res, next) => {
           loginPassword,
           existingUser.password
         );
-        console.log('isMatched =', isMatched);
         if (isMatched) {
           req.session.user = existingUser;
           return res.redirect('/');
