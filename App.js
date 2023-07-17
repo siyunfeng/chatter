@@ -27,9 +27,11 @@ app.use(
 // Routes
 const loginRoute = require('./routes/loginRoute');
 const signupRoute = require('./routes/signupRoute');
+const logoutRoute = require('./routes/logoutRoute');
 
 app.use('/login', loginRoute);
 app.use('/signup', signupRoute);
+app.use('/logout', logoutRoute);
 
 app.get('/', middleware.requireLogin, (req, res, next) => {
   const payload = {
