@@ -1,12 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Libre+Franklin&family=Nova+Mono&display=swap');
+
 :root {
-    --primary-color: rgb(91, 140, 255);
-    --accent-color: #ffde0a;
-    --button-hover-bg: #d4edff;
+    --blue: rgb(38, 125, 255);
+    --blueLight: #9bd1f9;
+    --yellow: #ffde0a;
+    --buttonHoverBg: #d4edff;
+    --greyLight: #dbdcda;
+    --blackLight: #212121;
+    --spacingEdge: 1rem;
+}
+
+* {
+    font-family: 'Nova Mono', 'Libre Franklin', sans-serif;
 }
 
 a {
     color: inherit;
     text-decoration: none;
+}
+
+h1 {
+    font-family: 'Arvo', serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
 }
 
 nav {
@@ -20,22 +37,81 @@ nav a {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: var(--blackLight);
     padding: 10px;
     font-size: 30px;
     width: 55px;
     height: 55px;
 }
 
-nav a.accent-color {
-    color: var(--accent-color);
+nav a.yellow {
+    color: var(--yellow);
 }
 
 nav a:hover {
-    background-color: var(--button-hover-bg);
-    color: var(--primary-color);
+    background-color: var(--buttonHoverBg);
+    color: var(--blue);
     border-radius: 50%;;
 }
 
 .mainSectionContainer {
-    background-color: blue;
+    padding: 0;
+    border-left: 1px solid var(--greyLight);
+    border-right: 1px solid var(--greyLight);
+}
+
+.titleContainer {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    padding: 0 var(--spacingEdge);
+    height: 55px;
+    border-bottom: 1px solid var(--greyLight)
+}
+
+.titleContainer h1 {
+    flex: 1;
+}
+
+.postFormContainer {
+    display: flex;
+    flex-shrink: 0;
+    padding: var(--spacingEdge);
+    border-bottom: 10px solid var(--buttonHoverBg);
+}
+
+.userImageContainer {
+    width: 50px;
+    height: 50px;
+}
+
+.userImageContainer img {
+    width: 100%;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.textareaContainer {
+    flex: 1;
+    padding: 0 0 0 var(--spacingEdge);
+}
+
+.textareaContainer textarea {
+    width: 100%;
+    border: none;
+    resize: none;
+    font-size: 18px;
+}
+
+#submitPostButton {
+    background-color: var(--blue);
+    color: white;
+    border: none;
+    border-radius: 40px;
+    padding: 8px 16px;
+}
+
+#submitPostButton:disabled {
+    background-color: var(--greyLight);
+    color: var(--blackLight);
 }
