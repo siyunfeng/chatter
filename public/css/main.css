@@ -69,6 +69,10 @@ button {
     color: var(--greyText);
 }
 
+button i, button span {
+    pointer-events: none;
+}
+
 .mainSectionContainer {
     padding: 0;
     border-left: 1px solid var(--greyLine);
@@ -174,17 +178,15 @@ button {
 
 .postFooter .postButtonContainer button {
     padding: auto;
-    transition: transform 0.1s;
 }
 
 .postButtonContainer button:hover {
     background-color: var(--buttonHoverBg);
     color: var(--blue);
     border-radius: 50%;
-    transform: scale(1.075);
 }
 
-.postButtonContainer button:active {
+.postButtonContainer.red button.active {
     color: var(--carol);
 }
 

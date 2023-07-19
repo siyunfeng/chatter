@@ -40,10 +40,13 @@ $(document).on('click', '.likeButton', (event) => {
     url: `/api/posts/${postId}/like`,
     type: 'PUT',
     success: (postData) => {
-      console.log(
-        'send PUT request through ajax, return data, likes.length >>>',
-        postData.likes.length
-      );
+      button.find('span').text(postData.likes.length || '');
+      // access loggedInUser from main-layout.pug script
+      if (postData.likes.includes(loggedInUser._id)) {
+        button.addClass('active');
+      } else {
+        button.removeClass('active');
+      }
     },
   });
 });
@@ -63,9 +66,13 @@ const getPostIdFromElement = (element) => {
 
 // Generate posts content
 const createPostHtml = (postData) => {
-  const { content, postedBy, createdAt, _id, likes } = postData;
+  const { content, postedBy, createdAt, _id } = postData;
   const { firstName, lastName, username, profileImg } = postedBy;
   const timeStamp = timeAgo(new Date(createdAt));
+
+  const likeButtonActive = postData.likes.includes(loggedInUser._id)
+    ? 'active'
+    : '';
 
   if (_id === undefined) {
     console.log('User object not populated.');
@@ -87,19 +94,19 @@ const createPostHtml = (postData) => {
                         <span></span>${content}
                     </div>
                     <div class='postFooter'>
-                        <div class='postButtonContainer'>
-                            <button class='likeButton'>
+                        <div class='postButtonContainer red'>
+                            <button class='likeButton ${likeButtonActive}'>
                                 <i class='far fa-heart'></i>
+                                <span>${postData.likes.length || ''}</span>
                             </button>
-                            <span>${likes.length || ''}</span>
                         </div>
                         <div class='postButtonContainer'>
                             <button>
                                 <i class='far fa-message'></i>
                             </button>
                         </div>
-                        <div class='postButtonContainer'>
-                            <button>
+                        <div class='postButtonContainer green'>
+                            <button class='retweetButton'>
                                 <i class='fas fa-retweet'></i>
                             </button>
                         </div>
