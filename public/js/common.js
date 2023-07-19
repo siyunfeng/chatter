@@ -1,3 +1,4 @@
+// New post editing & submit button interaction
 $('#postTextarea').keyup((event) => {
   const textbox = $(event.target).val();
   const textboxValue = textbox.trim();
@@ -12,6 +13,7 @@ $('#postTextarea').keyup((event) => {
   }
 });
 
+// Create new post
 $('#submitPostButton').click((event) => {
   const button = $(event.target);
   const textbox = $('#postTextarea');
@@ -27,15 +29,48 @@ $('#submitPostButton').click((event) => {
   });
 });
 
+// Click on like button
+$(document).on('click', '.likeButton', (event) => {
+  const button = $(event.target);
+  const postId = getPostIdFromElement(button);
+
+  if (postId === undefined) return;
+  /*  send PUT request to posts api, it will return a value from the api as its parameter in the success callback function */
+  $.ajax({
+    url: `/api/posts/${postId}/like`,
+    type: 'PUT',
+    success: (postData) => {
+      console.log(
+        'send PUT request through ajax, return data, likes.length >>>',
+        postData.likes.length
+      );
+    },
+  });
+});
+
+// Get post id from elements function
+const getPostIdFromElement = (element) => {
+  const isRoot = element.hasClass('post');
+  const rootElement = isRoot ? element : element.closest('.post');
+  const postId = rootElement.data().id;
+
+  if (postId) {
+    return postId;
+  } else {
+    return alert('Post id is undefined.');
+  }
+};
+
+// Generate posts content
 const createPostHtml = (postData) => {
-  const { content, postedBy, createdAt } = postData;
-  const { firstName, lastName, username, profileImg, _id } = postedBy;
+  const { content, postedBy, createdAt, _id, likes } = postData;
+  const { firstName, lastName, username, profileImg } = postedBy;
   const timeStamp = timeAgo(new Date(createdAt));
 
   if (_id === undefined) {
     console.log('User object not populated.');
   }
-  return `<div class='post'>
+  return `<div class='post' data-id=${_id}>
             <div class='mainContentContainer'>
                  <div class='userImageContainer'>
                     <img src=${profileImg} />
@@ -53,9 +88,10 @@ const createPostHtml = (postData) => {
                     </div>
                     <div class='postFooter'>
                         <div class='postButtonContainer'>
-                            <button>
+                            <button class='likeButton'>
                                 <i class='far fa-heart'></i>
                             </button>
+                            <span>${likes.length || ''}</span>
                         </div>
                         <div class='postButtonContainer'>
                             <button>
@@ -73,6 +109,7 @@ const createPostHtml = (postData) => {
         </div>`;
 };
 
+// Time interval conversion
 const timeAgo = (date) => {
   const seconds = Math.floor((new Date() - date) / 1000);
   const [secPerMinute, secPerHour, secPerDay, secPerMonth, secPerYear] = [

@@ -168,6 +168,8 @@ button {
 .postFooter .postButtonContainer {
     display: flex;
     flex: 1;
+    color: var(--greyText);
+    font-size: 16px;
 }
 
 .postFooter .postButtonContainer button {
