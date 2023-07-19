@@ -7,7 +7,19 @@ const Post = require('../../models/PostModel');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-router.get('/', (req, res, next) => {});
+router.get('/', async (req, res, next) => {
+  try {
+    const posts = await Post.find()
+      .populate('postedBy')
+      .sort({ createdAt: -1 });
+    if (posts) {
+      res.status(200).send(posts);
+    }
+  } catch (error) {
+    console.log('posts GET request error >>> ', error);
+    res.sendStatus(400);
+  }
+});
 
 router.post('/', async (req, res, next) => {
   if (!req.body.content) {
@@ -24,7 +36,7 @@ router.post('/', async (req, res, next) => {
       res.status(201).send(newPost);
     }
   } catch (error) {
-    console.log('new post error >>> ', error);
+    console.log('posts POST request error >>> ', error);
     res.sendStatus(400);
   }
 });
