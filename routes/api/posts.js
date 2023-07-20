@@ -63,9 +63,45 @@ router.put('/:id/like', async (req, res, next) => {
       { new: true }
     );
 
-    res.status(200).send(post);
+    return res.status(200).send(post);
   } catch (error) {
-    console.log('posts PUT request error >>> ', error);
+    console.log('post like PUT request error >>> ', error);
+    res.sendStatus(400);
+  }
+});
+
+router.post('/:id/repost', async (req, res, next) => {
+  try {
+    const postId = req.params.id;
+    const userId = req.session.user._id;
+
+    const deletedPost = await Post.findOneAndDelete({
+      postedBy: userId,
+      repostData: postId,
+    });
+
+    const option = deletedPost !== null ? '$pull' : '$addToSet';
+    let repost = deletedPost;
+
+    if (!repost) {
+      repost = await Post.create({ postedBy: userId, repostData: postId });
+    }
+
+    req.session.user = await User.findByIdAndUpdate(
+      userId,
+      { [option]: { reposts: repost._id } },
+      { new: true }
+    );
+
+    const post = await Post.findByIdAndUpdate(
+      postId,
+      { [option]: { repostedBy: userId } },
+      { new: true }
+    );
+
+    return res.status(200).send(post);
+  } catch (error) {
+    console.log('post repost POST request error >>> ', error);
     res.sendStatus(400);
   }
 });

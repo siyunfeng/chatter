@@ -51,6 +51,24 @@ $(document).on('click', '.likeButton', (event) => {
   });
 });
 
+// Click on repost button
+$(document).on('click', '.repostButton', (event) => {
+  const button = $(event.target);
+  const postId = getPostIdFromElement(button);
+
+  if (postId === undefined) return;
+
+  $.post(`/api/posts/${postId}/repost`, (postData) => {
+    button.find('span').text(postData.repostedBy.length || '');
+
+    if (postData.repostedBy.includes(loggedInUser._id)) {
+      button.addClass('active');
+    } else {
+      button.removeClass('active');
+    }
+  });
+});
+
 // Get post id from elements function
 const getPostIdFromElement = (element) => {
   const isRoot = element.hasClass('post');
@@ -71,6 +89,10 @@ const createPostHtml = (postData) => {
   const timeStamp = timeAgo(new Date(createdAt));
 
   const likeButtonActive = postData.likes.includes(loggedInUser._id)
+    ? 'active'
+    : '';
+
+  const repostButtonActive = postData.repostedBy.includes(loggedInUser._id)
     ? 'active'
     : '';
 
@@ -106,8 +128,9 @@ const createPostHtml = (postData) => {
                             </button>
                         </div>
                         <div class='postButtonContainer green'>
-                            <button class='retweetButton'>
+                            <button class='repostButton ${repostButtonActive}'>
                                 <i class='fas fa-retweet'></i>
+                                <span>${postData.repostedBy.length || ''}</span>
                             </button>
                         </div>
                     </div>

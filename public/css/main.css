@@ -3,12 +3,15 @@
 :root {
     --blue: rgb(38, 125, 255);
     --blueLight: #9BD1F9;
+    --blueHoverBg: #D4EDFF;
     --yellow: #FFDE0A;
     --greyLine: #DBDCDA;
     --greyText: #82807F;
     --blackLight: #212121;
-    --carol: #F95450;
-    --buttonHoverBg: #D4EDFF;
+    --redCarol: #F95450;
+    --pink: #f953501f;
+    --greenLime: #66930C;
+    --greenLight: #66930c1a;
     --spacingEdge: 1rem;
     --fontArvo: 'Arvo';
     --fontBonaNova: 'Bona Nova';
@@ -58,7 +61,7 @@ nav a.yellow {
 }
 
 nav a:hover {
-    background-color: var(--buttonHoverBg);
+    background-color: var(--blueHoverBg);
     color: var(--blue);
     border-radius: 50%;
 }
@@ -96,7 +99,7 @@ button i, button span {
     display: flex;
     flex-shrink: 0;
     padding: var(--spacingEdge);
-    border-bottom: 10px solid var(--buttonHoverBg);
+    border-bottom: 10px solid var(--blueHoverBg);
 }
 
 .userImageContainer {
@@ -181,14 +184,29 @@ button i, button span {
 }
 
 .postButtonContainer button:hover {
-    background-color: var(--buttonHoverBg);
+    background-color: var(--blueHoverBg);
     color: var(--blue);
     border-radius: 50%;
 }
 
-.postButtonContainer.red button.active {
-    color: var(--carol);
+.postButtonContainer.red button:hover {
+    color: var(--redCarol);
+    background-color: var(--pink);
 }
+
+.postButtonContainer.red button.active {
+    color: var(--redCarol);
+}
+
+.postButtonContainer.green button:hover {
+    color: var(--greenLime);
+    background-color: var(--greenLight);
+}
+
+.postButtonContainer.green button.active {
+    color: var(--greenLime);
+}
+
 
 .postHeader a:hover {
     text-decoration: underline;

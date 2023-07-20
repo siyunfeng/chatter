@@ -10,6 +10,7 @@ const UserModel = new Schema(
     password: { type: String, required: true },
     profileImg: { type: String, default: '/images/defaultProfileImg.png' },
     likes: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
+    reposts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
   },
   { timestamps: true }
 );
