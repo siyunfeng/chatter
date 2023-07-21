@@ -147,6 +147,12 @@ button i, button span {
     border-bottom: 1px solid var(--greyLine);
 }
 
+.postActionContainer {
+    padding: 0 0 var(--spacingEdge) var(--spacingEdge);
+    font-size: 14px; 
+    color: var(--greyText);
+}
+
 .mainContentContainer {
     display: flex;
     flex: 1;
@@ -165,6 +171,14 @@ button i, button span {
 
 .displayName {
     font-weight: bold;
+}
+
+.postHeader a:hover {
+    text-decoration: underline;
+}
+
+.postHeader a, .postHeader span {
+    padding: 0 5px 0 0;
 }
 
 .postFooter {
@@ -208,10 +222,4 @@ button i, button span {
 }
 
 
-.postHeader a:hover {
-    text-decoration: underline;
-}
 
-.postHeader a, .postHeader span {
-    padding: 0 5px 0 0;
-}

@@ -84,22 +84,36 @@ const getPostIdFromElement = (element) => {
 
 // Generate posts content
 const createPostHtml = (postData) => {
-  const { content, postedBy, createdAt, _id } = postData;
+  if (!postData) {
+    return alert('postData is null');
+  }
+
+  const isRepost = postData.repostData !== undefined;
+  const repostUsername = isRepost ? postData.postedBy.username : null;
+  postData = isRepost ? postData.repostData : postData;
+
+  const { content, postedBy, createdAt, _id, likes, repostedBy, repostData } =
+    postData;
   const { firstName, lastName, username, profileImg } = postedBy;
-  const timeStamp = timeAgo(new Date(createdAt));
-
-  const likeButtonActive = postData.likes.includes(loggedInUser._id)
-    ? 'active'
-    : '';
-
-  const repostButtonActive = postData.repostedBy.includes(loggedInUser._id)
-    ? 'active'
-    : '';
 
   if (_id === undefined) {
     console.log('User object not populated.');
   }
+
+  const timeStamp = timeAgo(new Date(createdAt));
+
+  const likeButtonActive = likes.includes(loggedInUser._id) ? 'active' : '';
+  const repostButtonActive = repostedBy.includes(loggedInUser._id)
+    ? 'active'
+    : '';
+
+  const repostPost = `<span><i class='fas fa-retweet'></i> Reposted by <a href='/profile/${repostUsername}'>@${repostUsername}</a></span>`;
+  const repostText = isRepost ? repostPost : '';
+
   return `<div class='post' data-id=${_id}>
+            <div class='postActionContainer'>
+              ${repostText}
+            </div>
             <div class='mainContentContainer'>
                  <div class='userImageContainer'>
                     <img src=${profileImg} />

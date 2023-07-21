@@ -11,9 +11,13 @@ router.get('/', async (req, res, next) => {
   try {
     const posts = await Post.find()
       .populate('postedBy')
+      .populate('repostData')
       .sort({ createdAt: -1 });
     if (posts) {
-      res.status(200).send(posts);
+      const results = await User.populate(posts, {
+        path: 'repostData.postedBy',
+      });
+      res.status(200).send(results);
     }
   } catch (error) {
     console.log('posts GET request error >>> ', error);
