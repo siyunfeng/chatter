@@ -1,8 +1,12 @@
 // New post editing & submit button interaction
-$('#postTextarea').keyup((event) => {
-  const textbox = $(event.target).val();
-  const textboxValue = textbox.trim();
-  const submitButton = $('#submitPostButton');
+$('#postTextarea, #replyTextarea').keyup((event) => {
+  const textbox = $(event.target);
+  const textboxValue = textbox.val().trim();
+
+  const isModal = textbox.parents('.modal').length === 1;
+  const submitButton = isModal
+    ? $('#submitReplyButton')
+    : $('#submitPostButton');
   if (!submitButton.length) {
     return alert('No submit button found.');
   }
@@ -137,7 +141,7 @@ const createPostHtml = (postData) => {
                             </button>
                         </div>
                         <div class='postButtonContainer'>
-                            <button>
+                            <button data-bs-toggle='modal' data-bs-target='#replyModal'>
                                 <i class='far fa-message'></i>
                             </button>
                         </div>

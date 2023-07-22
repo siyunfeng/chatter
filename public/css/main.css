@@ -99,7 +99,12 @@ button i, button span {
     display: flex;
     flex-shrink: 0;
     padding: var(--spacingEdge);
-    border-bottom: 10px solid var(--blueHoverBg);
+    border-bottom: 8px solid var(--blueHoverBg);
+}
+
+.modal .postFormContainer {
+    padding: var(--spacingEdge) 0 0 0;
+    border: none;
 }
 
 .userImageContainer {
