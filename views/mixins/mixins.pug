@@ -21,7 +21,6 @@ mixin createReplyModal(loggedInUser)
                 .modal-header
                     h1#replyModalLabel.modal-title.fs-5 Reply
                     button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
-                    span(aria-hidden='true') &times;
                 .modal-body
                     #originalPostContainer
                     +createReplyPostForm(loggedInUser)

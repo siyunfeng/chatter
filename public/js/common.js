@@ -43,6 +43,11 @@ $('#replyModal').on('show.bs.modal', (event) => {
   });
 });
 
+// remove previous original post in reply modal when close the modal
+$('#replyModal').on('hidden.bs.modal', () => {
+  $('#originalPostContainer').html('');
+});
+
 // Click on like button
 $(document).on('click', '.likeButton', (event) => {
   const button = $(event.target);
