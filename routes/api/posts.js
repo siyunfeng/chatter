@@ -23,12 +23,19 @@ router.get('/:id', async (req, res, next) => {
 // create new post
 router.post('/', async (req, res, next) => {
   if (!req.body.content) {
+    console.log('new post/reply content param is null for posts POST request');
     return res.sendStatus(400);
   }
+
   const postData = {
     content: req.body.content,
     postedBy: req.session.user,
   };
+
+  if (req.body.replyTo) {
+    postData.replyTo = req.body.replyTo;
+  }
+
   try {
     let newPost = await Post.create(postData);
     if (newPost) {

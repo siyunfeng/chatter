@@ -1,4 +1,4 @@
-// New post editing & submit button interaction
+// New post/reply editing & submit button interaction
 $('#postTextarea, #replyTextarea').keyup((event) => {
   const textbox = $(event.target);
   const textboxValue = textbox.val().trim();
@@ -17,13 +17,23 @@ $('#postTextarea, #replyTextarea').keyup((event) => {
   }
 });
 
-// Create new post
-$('#submitPostButton').click((event) => {
+// Create new post/reply
+$('#submitPostButton, #submitReplyButton').click((event) => {
   const button = $(event.target);
-  const textbox = $('#postTextarea');
+  const isModal = button.parents('.modal').length === 1;
+  const textbox = isModal ? $('#replyTextarea') : $('#postTextarea');
+
   const data = {
     content: textbox.val().trim(),
   };
+
+  if (isModal) {
+    const id = button.data().id;
+    if (!id) {
+      return alert('Reply button id is null.');
+    }
+    data.replyTo = id;
+  }
 
   $.post('/api/posts', data, (postData) => {
     const html = createPostHtml(postData);
@@ -37,6 +47,7 @@ $('#submitPostButton').click((event) => {
 $('#replyModal').on('show.bs.modal', (event) => {
   const button = $(event.relatedTarget);
   const postId = getPostIdFromElement(button);
+  $('#submitReplyButton').data('id', postId);
 
   $.get(`/api/posts/${postId}`, (post) => {
     userPosts(post, $('#originalPostContainer'));

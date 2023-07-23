@@ -9,6 +9,7 @@ const PostModel = new Schema(
     likes: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     repostedBy: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     repostData: { type: Schema.Types.ObjectId, ref: 'Post' },
+    replyTo: { type: Schema.Types.ObjectId, ref: 'Post' },
   },
   { timestamps: true }
 );
