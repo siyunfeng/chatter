@@ -33,6 +33,16 @@ $('#submitPostButton').click((event) => {
   });
 });
 
+// Click on reply/comment button
+$('#replyModal').on('show.bs.modal', (event) => {
+  const button = $(event.relatedTarget);
+  const postId = getPostIdFromElement(button);
+
+  $.get(`/api/posts/${postId}`, (post) => {
+    userPosts(post, $('#originalPostContainer'));
+  });
+});
+
 // Click on like button
 $(document).on('click', '.likeButton', (event) => {
   const button = $(event.target);
@@ -192,4 +202,20 @@ const timeAgo = (date) => {
   if (seconds < 10) return 'just now';
 
   return Math.floor(seconds) + ' seconds ago';
+};
+
+// Invoke generate posts content within specific container
+const userPosts = (posts, container) => {
+  container.html('');
+
+  posts.forEach((post) => {
+    const html = createPostHtml(post);
+    container.append(html);
+  });
+
+  if (!posts.length) {
+    container.append(
+      `<span class='noPosts'>This user have not posted yet. </span>`
+    );
+  }
 };

@@ -7,24 +7,20 @@ const Post = require('../../models/PostModel');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// get all posts
 router.get('/', async (req, res, next) => {
-  try {
-    const posts = await Post.find()
-      .populate('postedBy')
-      .populate('repostData')
-      .sort({ createdAt: -1 });
-    if (posts) {
-      const results = await User.populate(posts, {
-        path: 'repostData.postedBy',
-      });
-      res.status(200).send(results);
-    }
-  } catch (error) {
-    console.log('posts GET request error >>> ', error);
-    res.sendStatus(400);
-  }
+  const results = await getPosts({});
+  res.status(200).send(results);
 });
 
+// get specific post
+router.get('/:id', async (req, res, next) => {
+  const postId = req.params.id;
+  const results = await getPosts({ _id: postId });
+  res.status(200).send(results);
+});
+
+// create new post
 router.post('/', async (req, res, next) => {
   if (!req.body.content) {
     return res.sendStatus(400);
@@ -45,6 +41,7 @@ router.post('/', async (req, res, next) => {
   }
 });
 
+// update likes in post collection
 router.put('/:id/like', async (req, res, next) => {
   try {
     const postId = req.params.id;
@@ -109,5 +106,22 @@ router.post('/:id/repost', async (req, res, next) => {
     res.sendStatus(400);
   }
 });
+
+const getPosts = async (postFilter) => {
+  try {
+    const posts = await Post.find(postFilter)
+      .populate('postedBy')
+      .populate('repostData')
+      .sort({ createdAt: -1 });
+    if (posts) {
+      const results = await User.populate(posts, {
+        path: 'repostData.postedBy',
+      });
+      return results;
+    }
+  } catch (error) {
+    console.log('posts GET request error >>> ', error);
+  }
+};
 
 module.exports = router;
