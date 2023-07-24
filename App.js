@@ -28,10 +28,12 @@ app.use(
 const loginRoute = require('./routes/loginRoute');
 const signupRoute = require('./routes/signupRoute');
 const logoutRoute = require('./routes/logoutRoute');
+const postRoute = require('./routes/postRoute');
 
 app.use('/login', loginRoute);
 app.use('/signup', signupRoute);
 app.use('/logout', logoutRoute);
+app.use('/post', postRoute);
 
 // APIs
 const postAPIRoute = require('./routes/api/posts');
