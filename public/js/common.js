@@ -36,10 +36,14 @@ $('#submitPostButton, #submitReplyButton').click((event) => {
   }
 
   $.post('/api/posts', data, (postData) => {
-    const html = createPostHtml(postData);
-    $('.postsContainter').prepend(html);
-    textbox.val('');
-    button.prop('disabled', true);
+    if (postData.replyTo) {
+      location.reload();
+    } else {
+      const html = createPostHtml(postData);
+      $('.postsContainter').prepend(html);
+      textbox.val('');
+      button.prop('disabled', true);
+    }
   });
 });
 
@@ -99,6 +103,16 @@ $(document).on('click', '.repostButton', (event) => {
   });
 });
 
+// Click on specific post to get to its details page
+$(document).on('click', '.post', (event) => {
+  const eachPost = $(event.target);
+  const postId = getPostIdFromElement(eachPost);
+
+  if (postId && !eachPost.is('button')) {
+    window.location.href = `/post/${postId}`;
+  }
+});
+
 // Get post id from elements function
 const getPostIdFromElement = (element) => {
   const isRoot = element.hasClass('post');
@@ -122,8 +136,16 @@ const createPostHtml = (postData) => {
   const repostUsername = isRepost ? postData.postedBy.username : null;
   postData = isRepost ? postData.repostData : postData;
 
-  const { content, postedBy, createdAt, _id, likes, repostedBy, repostData } =
-    postData;
+  const {
+    content,
+    postedBy,
+    createdAt,
+    _id,
+    likes,
+    repostedBy,
+    repostData,
+    replyTo,
+  } = postData;
   const { firstName, lastName, username, profileImg } = postedBy;
 
   if (_id === undefined) {
@@ -139,6 +161,20 @@ const createPostHtml = (postData) => {
 
   const repostPost = `<span><i class='fas fa-retweet'></i> Reposted by <a href='/profile/${repostUsername}'>@${repostUsername}</a></span>`;
   const repostText = isRepost ? repostPost : '';
+
+  let replyFlag = '';
+  if (replyTo) {
+    if (!replyTo._id) {
+      return alert('Reply to is not populated');
+    } else if (!replyTo.postedBy._id) {
+      return alert('Posted by to is not populated');
+    }
+
+    const { username } = replyTo.postedBy;
+    replyFlag = `<div class='replyFlag'>
+                    Replying to <a href='/profile/${username}'>@${username}</a>
+                </div>`;
+  }
 
   return `<div class='post' data-id=${_id}>
             <div class='postActionContainer'>
@@ -156,6 +192,7 @@ const createPostHtml = (postData) => {
                         <span class='username'>@${username}</span>
                         <span class='postDate'>${timeStamp}</span>
                     </div>
+                    ${replyFlag}
                     <div class='postBody'>
                         <span></span>${content}
                     </div>

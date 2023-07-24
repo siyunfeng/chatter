@@ -230,5 +230,11 @@ button i, button span {
     color: var(--greenLime);
 }
 
+.replyFlag {
+    margin: 0 0 5px 0;
+}
 
+.replyFlag a {
+    color: var(--blue)
+}
 

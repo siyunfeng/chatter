@@ -116,15 +116,17 @@ router.post('/:id/repost', async (req, res, next) => {
 
 const getPosts = async (postFilter) => {
   try {
-    const posts = await Post.find(postFilter)
+    let posts = await Post.find(postFilter)
       .populate('postedBy')
       .populate('repostData')
+      .populate('replyTo')
       .sort({ createdAt: -1 });
     if (posts) {
-      const results = await User.populate(posts, {
+      posts = await User.populate(posts, { path: 'replyTo.postedBy' });
+
+      return await User.populate(posts, {
         path: 'repostData.postedBy',
       });
-      return results;
     }
   } catch (error) {
     console.log('posts GET request error >>> ', error);
