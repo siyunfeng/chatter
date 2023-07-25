@@ -16,8 +16,22 @@ router.get('/', async (req, res, next) => {
 // get specific post
 router.get('/:id', async (req, res, next) => {
   const postId = req.params.id;
-  const results = await getPosts({ _id: postId });
-  res.status(200).send(results);
+  try {
+    let postData = await getPosts({ _id: postId });
+    postData = postData[0];
+
+    const posts = { postData: postData };
+
+    if (postData.replyTo) {
+      posts.replyTo = postData.replyTo;
+    }
+
+    posts.replies = await getPosts({ replyTo: postId });
+
+    res.status(200).send(posts);
+  } catch (error) {
+    console.log('posts.js route GET request of specific post error: ', error);
+  }
 });
 
 // create new post

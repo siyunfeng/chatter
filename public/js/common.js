@@ -54,7 +54,7 @@ $('#replyModal').on('show.bs.modal', (event) => {
   $('#submitReplyButton').data('id', postId);
 
   $.get(`/api/posts/${postId}`, (post) => {
-    userPosts(post, $('#originalPostContainer'));
+    userPosts(post.postData, $('#originalPostContainer'));
   });
 });
 
@@ -127,7 +127,7 @@ const getPostIdFromElement = (element) => {
 };
 
 // Generate posts content
-const createPostHtml = (postData) => {
+const createPostHtml = (postData, largeFont = false) => {
   if (!postData) {
     return alert('postData is null');
   }
@@ -159,14 +159,14 @@ const createPostHtml = (postData) => {
     ? 'active'
     : '';
 
+  const largeFontClass = largeFont ? 'largeFont' : '';
+
   const repostPost = `<span><i class='fas fa-retweet'></i> Reposted by <a href='/profile/${repostUsername}'>@${repostUsername}</a></span>`;
   const repostText = isRepost ? repostPost : '';
 
   let replyFlag = '';
-  if (replyTo) {
-    if (!replyTo._id) {
-      return alert('Reply to is not populated');
-    } else if (!replyTo.postedBy._id) {
+  if (replyTo && replyTo._id) {
+    if (!replyTo.postedBy._id) {
       return alert('Posted by to is not populated');
     }
 
@@ -176,7 +176,7 @@ const createPostHtml = (postData) => {
                 </div>`;
   }
 
-  return `<div class='post' data-id=${_id}>
+  return `<div class='post ${largeFontClass}' data-id=${_id}>
             <div class='postActionContainer'>
               ${repostText}
             </div>
@@ -261,6 +261,10 @@ const timeAgo = (date) => {
 const userPosts = (posts, container) => {
   container.html('');
 
+  if (!Array.isArray(posts)) {
+    posts = [posts];
+  }
+
   posts.forEach((post) => {
     const html = createPostHtml(post);
     container.append(html);
@@ -271,4 +275,22 @@ const userPosts = (posts, container) => {
       `<span class='noPosts'>This user have not posted yet. </span>`
     );
   }
+};
+
+// Genertae posts details with replies
+const userPostsWithReplies = (posts, container) => {
+  container.html('');
+
+  if (posts.replyTo && posts.replyTo._id) {
+    let html = createPostHtml(posts.replyTo);
+    container.append(html);
+  }
+
+  let mainPostHtml = createPostHtml(posts.postData, true);
+  container.append(mainPostHtml);
+
+  posts.replies.forEach((post) => {
+    let html = createPostHtml(post);
+    container.append(html);
+  });
 };

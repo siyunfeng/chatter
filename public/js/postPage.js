@@ -1,5 +1,5 @@
 $(document).ready(() => {
   $.get(`/api/posts/${postId}`, (posts) => {
-    userPosts(posts, $('.postsContainter'));
+    userPostsWithReplies(posts, $('.postsContainter'));
   });
 });

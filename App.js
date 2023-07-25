@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 3001;
-const middleware = require('./middleware');
+const { requireLogin } = require('./middleware');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('./db');
@@ -33,14 +33,14 @@ const postRoute = require('./routes/postRoute');
 app.use('/login', loginRoute);
 app.use('/signup', signupRoute);
 app.use('/logout', logoutRoute);
-app.use('/post', postRoute);
+app.use('/post', requireLogin, postRoute);
 
 // APIs
 const postAPIRoute = require('./routes/api/posts');
 
 app.use('/api/posts', postAPIRoute);
 
-app.get('/', middleware.requireLogin, (req, res, next) => {
+app.get('/', requireLogin, (req, res, next) => {
   const payload = {
     pageTitle: 'Home',
     loggedInUser: req.session.user,

@@ -72,7 +72,8 @@ button {
     color: var(--greyText);
 }
 
-button i, button span {
+button i, 
+button span {
     pointer-events: none;
 }
 
@@ -174,7 +175,8 @@ button i, button span {
     flex: 1;
 }
 
-.username, .postDate {
+.username, 
+.postDate {
     color: var(--greyText);
 }
 
@@ -186,7 +188,8 @@ button i, button span {
     text-decoration: underline;
 }
 
-.postHeader a, .postHeader span {
+.postHeader a, 
+.postHeader span {
     padding: 0 5px 0 0;
 }
 
@@ -238,3 +241,8 @@ button i, button span {
     color: var(--blue)
 }
 
+.post.largeFont .postBody, 
+.post.largeFont .postFooter {
+    font-size: 19px;
+    font-family: var(--fontUbuntu), monospace;
+}
