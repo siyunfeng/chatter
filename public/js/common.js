@@ -63,6 +63,29 @@ $('#replyModal').on('hidden.bs.modal', () => {
   $('#originalPostContainer').html('');
 });
 
+// Click on delete button in user's post container
+$('#deletePostModal').on('show.bs.modal', (event) => {
+  const button = $(event.relatedTarget);
+  const postId = getPostIdFromElement(button);
+  $('#deletePostButton').data('id', postId);
+
+  $('#deletePostButton').click((event) => {
+    const id = $(event.target).data('id');
+
+    $.ajax({
+      url: `/api/posts/${id}`,
+      type: 'DELETE',
+      success: (data, status, xhr) => {
+        if (xhr.status !== 202) {
+          alert('Failed to delete the post.');
+          return;
+        }
+        location.reload();
+      },
+    });
+  });
+});
+
 // Click on like button
 $(document).on('click', '.likeButton', (event) => {
   const button = $(event.target);
@@ -140,7 +163,6 @@ const createPostHtml = (postData, largeFont = false) => {
     content,
     postedBy,
     createdAt,
-    _id,
     likes,
     repostedBy,
     repostData,
@@ -148,7 +170,7 @@ const createPostHtml = (postData, largeFont = false) => {
   } = postData;
   const { firstName, lastName, username, profileImg } = postedBy;
 
-  if (_id === undefined) {
+  if (postData._id === undefined) {
     console.log('User object not populated.');
   }
 
@@ -176,7 +198,12 @@ const createPostHtml = (postData, largeFont = false) => {
                 </div>`;
   }
 
-  return `<div class='post ${largeFontClass}' data-id=${_id}>
+  let buttons = '';
+  if (postedBy._id === loggedInUser._id) {
+    buttons = `<button data-id='${postData._id}' data-bs-toggle='modal' data-bs-target='#deletePostModal'><i class='far fa-trash-can'></i></button>`;
+  }
+
+  return `<div class='post ${largeFontClass}' data-id=${postData._id}>
             <div class='postActionContainer'>
               ${repostText}
             </div>
@@ -191,6 +218,7 @@ const createPostHtml = (postData, largeFont = false) => {
                         </a>
                         <span class='username'>@${username}</span>
                         <span class='postDate'>${timeStamp}</span>
+                        ${buttons}
                     </div>
                     ${replyFlag}
                     <div class='postBody'>

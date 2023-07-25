@@ -92,6 +92,7 @@ router.put('/:id/like', async (req, res, next) => {
   }
 });
 
+// create new repost
 router.post('/:id/repost', async (req, res, next) => {
   try {
     const postId = req.params.id;
@@ -128,6 +129,18 @@ router.post('/:id/repost', async (req, res, next) => {
   }
 });
 
+// delete existing post
+router.delete('/:id', async (req, res, next) => {
+  try {
+    await Post.findByIdAndDelete(req.params.id);
+    res.sendStatus(202);
+  } catch (error) {
+    console.log('posts DELETE request error: ', error);
+    res.sendStatus(400);
+  }
+});
+
+// get post details with specific filters
 const getPosts = async (postFilter) => {
   try {
     let posts = await Post.find(postFilter)

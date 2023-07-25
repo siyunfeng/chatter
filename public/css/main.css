@@ -175,6 +175,14 @@ button span {
     flex: 1;
 }
 
+.postContentContainer .postHeader {
+    display: flex;
+}
+
+.postContentContainer .postHeader .postDate {
+    flex: 1;
+}
+
 .username, 
 .postDate {
     color: var(--greyText);
