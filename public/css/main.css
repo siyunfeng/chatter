@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Bona+Nova:wght@400;700&family=Libre+Franklin:wght@400;700&family=Quicksand:wght@400;700&family=Roboto:wght@400;700&family=Ubuntu:wght@400;700&family=Ysabeau+Infant:wght@400;700&display=swap');
 
 :root {
-    --blue: rgb(38, 125, 255);
+    --blue: rgb(88, 166, 255);
+    --blueHoverBg: rgb(88, 166, 255, 0.15);
     --blueLight: #9BD1F9;
-    --blueHoverBg: #D4EDFF;
     --yellow: #FFDE0A;
     --greyLine: #DBDCDA;
     --greyText: #82807F;
@@ -255,6 +255,55 @@ button span {
     font-family: var(--fontUbuntu), monospace;
 }
 
+/* Profile Page */
+
 .profileNotFoundErrMsg {
     padding: var(--spacingEdge);
+}
+
+.profileHeaderContainer .coverPhotoContainer {
+    height: 180px;
+    background-color: var(--blueLight);
+    position: relative;
+}
+
+.profileHeaderContainer .userImageContainer {
+    width: 130px;
+    height: 130px;
+    margin: 0 0 0 var(--spacingEdge);
+    position: absolute;
+    bottom: -65px;
+}
+
+.profileHeaderContainer .userImageContainer img {
+    border: 3px solid white;
+    box-shadow: 3px 3px 2px 1px rgba(128, 128, 128, 0.1);
+}
+
+.profileHeaderContainer .profileButtonsContainer {
+    text-align: right;
+    min-height: 65px;
+    padding: var(--spacingEdge);
+}
+
+.profileButton,
+.followButton {
+    display: inline-block;
+    color: var(--blue);
+    font-weight: bold;
+    padding: 5px 15px;
+    margin: 0 0 0 var(--spacingEdge);
+    border: 1px solid var(--blue);
+    border-radius: 40px;
+}
+
+.profileButton:hover,
+.followButton:hover {
+    background-color: var(--blueHoverBg);
+    border: 1px solid var(--blueHoverBg);
+}
+
+.followButton.following {
+    color: white;
+    background-color: var(--blue);
 }
