@@ -32,6 +32,20 @@ router.get('/:username', async (req, res, next) => {
   }
 });
 
+router.get('/:username/replies', async (req, res, next) => {
+  try {
+    const { username } = req.params;
+    const { user } = req.session;
+    const payload = await getPayload(username, user);
+
+    payload.selectedTab = 'replies';
+
+    res.status(200).render('profile', payload);
+  } catch (error) {
+    console.log('profile route GET request error: ', error);
+  }
+});
+
 const getPayload = async (username, loggedInUser) => {
   try {
     let user = await User.findOne({ username: username });
