@@ -307,3 +307,52 @@ button span {
     color: white;
     background-color: var(--blue);
 }
+
+.profileHeaderContainer .userDetailsContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem var(--spacingEdge);
+}
+
+.followersContainer .value {
+    font-weight: bold;
+    margin: 0 5px 0 0;
+}
+
+.followersContainer span:not(.value) {
+    color: var(--greyText);
+}
+
+.followersContainer a {
+    margin: 0 var(--spacingEdge) 0 0;
+}
+
+.followersContainer a:hover {
+    border-bottom: 1px solid var(--greyLine);
+}
+
+.tabsContainer {
+    display: flex;
+    flex-shrink: 0;
+    border-bottom: 1px solid var(--greyLine);
+}
+
+.tab {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    font-weight: bold;
+    color: var(--greyText);
+}
+
+.tab:hover {
+    color: var(--blue);
+    background-color: var(--blueHoverBg);
+}
+
+.tab.active {
+    color: var(--blue);
+    border-bottom: 2px solid var(--blue);
+}
