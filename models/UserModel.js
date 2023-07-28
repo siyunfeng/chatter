@@ -11,6 +11,8 @@ const UserModel = new Schema(
     profileImg: { type: String, default: '/images/defaultProfileImg.png' },
     likes: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
     reposts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
+    followings: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    followers: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   },
   { timestamps: true }
 );

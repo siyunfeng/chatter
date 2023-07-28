@@ -37,7 +37,7 @@ router.post('/', async (req, res, next) => {
         const saltRounds = 9;
         data.password = await bcrypt.hash(password, saltRounds);
         const newUser = await User.create(data);
-        console.log('newUser =', newUser);
+
         req.session.user = newUser;
         return res.redirect('/');
       } else {

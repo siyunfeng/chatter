@@ -39,8 +39,10 @@ app.use('/profile', requireLogin, profileRoute);
 
 // APIs
 const postAPIRoute = require('./routes/api/posts');
+const userAPIRoute = require('./routes/api/users');
 
 app.use('/api/posts', postAPIRoute);
+app.use('/api/users', userAPIRoute);
 
 app.get('/', requireLogin, (req, res, next) => {
   const payload = {

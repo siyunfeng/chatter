@@ -19,7 +19,7 @@ router.get('/', (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   const payload = req.body;
-  console.log('req.body =', req.body);
+
   try {
     const { loginUsernameOrEmail, loginPassword } = req.body;
     if (loginUsernameOrEmail && loginPassword) {
@@ -29,7 +29,7 @@ router.post('/', async (req, res, next) => {
           { email: loginUsernameOrEmail },
         ],
       });
-      console.log('existingUser =', existingUser);
+
       if (existingUser) {
         const isMatched = await bcrypt.compare(
           loginPassword,

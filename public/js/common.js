@@ -136,6 +136,20 @@ $(document).on('click', '.post', (event) => {
   }
 });
 
+// Click on follow button to follow a specific user
+$(document).on('click', '.followButton', (event) => {
+  const button = $(event.target);
+  const userId = button.data().user;
+
+  $.ajax({
+    url: `/api/users/${userId}/follow`,
+    type: 'PUT',
+    success: (data) => {
+      console.log(data);
+    },
+  });
+});
+
 // Get post id from elements function
 const getPostIdFromElement = (element) => {
   const isRoot = element.hasClass('post');
