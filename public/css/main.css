@@ -360,3 +360,8 @@ button span {
     color: var(--blue);
     border-bottom: 2px solid var(--blue);
 }
+
+.noResults,
+.noPosts {
+    padding: var(--spacingEdge);
+}

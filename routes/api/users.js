@@ -43,9 +43,9 @@ router.put('/:userId/follow', async (req, res, next) => {
 router.get('/:userId/following', async (req, res, next) => {
   try {
     const { userId } = req.params;
-    const data = await User.findById(userId).populate('followings');
-    if (data) {
-      res.status(200).send(data);
+    const userNetwork = await User.findById(userId).populate('followings');
+    if (userNetwork) {
+      res.status(200).send(userNetwork);
     }
   } catch (error) {
     console.log('users route following GET request error: ', error);
@@ -57,9 +57,9 @@ router.get('/:userId/following', async (req, res, next) => {
 router.get('/:userId/followers', async (req, res, next) => {
   try {
     const { userId } = req.params;
-    const data = await User.findById(userId).populate('followers');
-    if (data) {
-      res.status(200).send(data);
+    const userNetwork = await User.findById(userId).populate('followers');
+    if (userNetwork) {
+      res.status(200).send(userNetwork);
     }
   } catch (error) {
     console.log('users route followers GET request error: ', error);
