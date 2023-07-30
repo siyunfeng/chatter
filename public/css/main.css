@@ -8,6 +8,7 @@
     --greyLine: #DBDCDA;
     --greyText: #82807F;
     --blackLight: #212121;
+    --blackTransparent: #21212175;
     --redCarol: #F95450;
     --pink: #f953501f;
     --greenLime: #66930C;
@@ -277,6 +278,9 @@ button span {
     margin: 0 0 0 var(--spacingEdge);
     position: absolute;
     bottom: -65px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .profileHeaderContainer .userImageContainer img {
@@ -380,4 +384,15 @@ button span {
 .user .userDetailsContainer {
     flex: 1;
     padding: 0 var(--spacingEdge);
+}
+
+.profileImageButton {
+    position: absolute;
+    font-size: 50px;
+    color: var(--blackTransparent);
+    display: none;
+}
+
+.userImageContainer:hover .profileImageButton {
+    display: block;
 }
