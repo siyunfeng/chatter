@@ -32,6 +32,7 @@ router.get('/:username', async (req, res, next) => {
   }
 });
 
+// get user profile replies tab
 router.get('/:username/replies', async (req, res, next) => {
   try {
     const { username } = req.params;
@@ -43,6 +44,36 @@ router.get('/:username/replies', async (req, res, next) => {
     res.status(200).render('profile', payload);
   } catch (error) {
     console.log('profile route GET request error: ', error);
+  }
+});
+
+// get user network followings
+router.get('/:username/following', async (req, res, next) => {
+  try {
+    const { username } = req.params;
+    const { user } = req.session;
+    const payload = await getPayload(username, user);
+
+    payload.selectedTab = 'following';
+
+    res.status(200).render('followersAndFollowings', payload);
+  } catch (error) {
+    console.log('profile route following GET request error: ', error);
+  }
+});
+
+// get user network followers
+router.get('/:username/followers', async (req, res, next) => {
+  try {
+    const { username } = req.params;
+    const { user } = req.session;
+    const payload = await getPayload(username, user);
+
+    payload.selectedTab = 'followers';
+
+    res.status(200).render('followersAndFollowings', payload);
+  } catch (error) {
+    console.log('profile route followers GET request error: ', error);
   }
 });
 

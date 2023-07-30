@@ -1,0 +1,18 @@
+extends layouts/main-layout.pug
+
+block content
+    if !profileUser
+        p.profileNotFoundErrMsg Please check if the username or user id is incorrect. 
+    else 
+        script.
+            const profileUserId = `!{profileUser._id}`
+            const selectedTab = `!{selectedTab}`
+
+        .tabsContainer 
+            +createTab('Following', `/profile/${profileUser.username}/following`, selectedTab !== 'followers')
+            +createTab('Followers', `/profile/${profileUser.username}/followers`, selectedTab === 'followers')
+
+        .resultsContainer 
+
+block scripts
+    script(src='/js/followersAndFollowings.js') 
