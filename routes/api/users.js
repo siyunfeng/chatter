@@ -39,4 +39,32 @@ router.put('/:userId/follow', async (req, res, next) => {
   }
 });
 
+// get user's followings
+router.get('/:userId/following', async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+    const data = await User.findById(userId).populate('followings');
+    if (data) {
+      res.status(200).send(data);
+    }
+  } catch (error) {
+    console.log('users route following GET request error: ', error);
+    res.sendStatus(400);
+  }
+});
+
+// get user's followers
+router.get('/:userId/followers', async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+    const data = await User.findById(userId).populate('followers');
+    if (data) {
+      res.status(200).send(data);
+    }
+  } catch (error) {
+    console.log('users route followers GET request error: ', error);
+    res.sendStatus(400);
+  }
+});
+
 module.exports = router;
