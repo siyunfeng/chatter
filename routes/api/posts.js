@@ -10,11 +10,31 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // get all posts
 router.get('/', async (req, res, next) => {
   const searchObj = req.query;
+  const { user } = req.session;
   /* based on if req.query is passing isReply, if yes, check if its value, if true, use MongoDB syntax to mutate if the replyTo exists or not, then remove the isReply from searchObj */
   if (searchObj.isReply !== undefined) {
     const isReply = searchObj.isReply === 'true';
     searchObj.replyTo = { $exists: isReply };
     delete searchObj.isReply;
+  }
+
+  if (searchObj.followingOnly !== undefined) {
+    const followingOnly = searchObj.followingOnly === 'true';
+
+    if (followingOnly) {
+      let objectIds = [];
+
+      if (!user.followings) {
+        user.followings = [];
+      }
+
+      user.followings.forEach((followingUser) => {
+        objectIds.push(followingUser);
+      });
+
+      searchObj.postedBy = { $in: objectIds };
+    }
+    delete searchObj.followingOnly;
   }
 
   const results = await getPosts(searchObj);
