@@ -365,3 +365,19 @@ button span {
 .noPosts {
     padding: var(--spacingEdge);
 }
+
+.networkResultsContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.networkResultsContainer .user {
+    padding: var(--spacingEdge);
+    display: flex;
+    border-bottom: 1px solid var(--greyLine);
+}
+
+.user .userDetailsContainer {
+    flex: 1;
+    padding: 0 var(--spacingEdge);
+}

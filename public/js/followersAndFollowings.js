@@ -33,6 +33,18 @@ const getUsersNetwork = (userNetwork, container) => {
 
 const createNetworkHtml = (userData, showFollowButton) => {
   const { firstName, lastName, username, profileImg } = userData;
+
+  let isFollowing = loggedInUser.followings?.includes(userData._id);
+
+  let buttonText = isFollowing ? 'Following' : 'Follow';
+  let buttonClass = isFollowing ? 'followButton following' : 'followButton';
+  let followButton = '';
+  if (showFollowButton && loggedInUser._id !== userData._id) {
+    followButton = `<div class='followButtonContainer'>
+                        <button class='${buttonClass}' data-user='${userData._id}'>${buttonText}</button>
+                    </div>`;
+  }
+
   return `<div class='user'>
             <div class='userImageContainer'>
                 <img src='${profileImg}' />
@@ -45,5 +57,6 @@ const createNetworkHtml = (userData, showFollowButton) => {
                     <span class='username'>@${username}</span>
                 </div>
             </div>
+            ${followButton}
         </div>`;
 };
