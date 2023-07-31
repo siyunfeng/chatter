@@ -2,6 +2,10 @@ const express = require('express');
 const app = express();
 const router = express.Router();
 const bodyParser = require('body-parser');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' }); // dest stands for destination
+const path = require('path');
+const fs = require('fs');
 const User = require('../../models/UserModel');
 const Post = require('../../models/PostModel');
 
@@ -66,5 +70,35 @@ router.get('/:userId/followers', async (req, res, next) => {
     res.sendStatus(400);
   }
 });
+
+// create user profile image, .single method is for uploading single file
+router.post(
+  '/profileImage',
+  upload.single('croppedImage'),
+  async (req, res, next) => {
+    try {
+      if (!req.file) {
+        console.log('No file uploaded with ajax request');
+        return res.sendStatus(400);
+      }
+
+      let filePath = `/uploads/images/${req.file.filename}.png`;
+      let tempPath = req.file.path;
+      let targetPath = path.join(__dirname, `../../${filePath}`);
+
+      fs.rename(tempPath, targetPath, (error) => {
+        if (error) {
+          console.log('fs.rename error: ', error);
+          return res.sendStatus(400);
+        }
+
+        res.sendStatus(200);
+      });
+    } catch (error) {
+      console.log('users route profile image POST request error: ', error);
+      res.sendStatus(400);
+    }
+  }
+);
 
 module.exports = router;

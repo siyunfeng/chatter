@@ -90,10 +90,10 @@ $('#deletePostButton').click((event) => {
   });
 });
 
-//
+// Modal for uploading profile image
 $('#fileImage').change((event) => {
   const input = $(event.target)[0];
-  console.log('input.files =', input.files, 'input.files[0] =', input.files[0]);
+  // console.log('input.files =', input.files, 'input.files[0] =', input.files[0]);
   if (input.files && input.files[0]) {
     const reader = new FileReader();
     reader.onload = (event) => {
@@ -113,6 +113,35 @@ $('#fileImage').change((event) => {
   } else {
     console.log('nope');
   }
+});
+
+// Submit profile image uploading
+$('#imageUploadButton').click(() => {
+  let canvas = cropper.getCroppedCanvas();
+
+  if (!canvas) {
+    alert('Could not upload this file. Please make sure it is an image file.');
+    return;
+  }
+  // blob stands for Binary Large Object, used for storing images and videos
+  canvas.toBlob((blob) => {
+    let formData = new FormData();
+    formData.append('croppedImage', blob); // key-value pair for formData object, same as formData.croppedImage = blob
+
+    $.ajax({
+      url: '/api/users/profileImage',
+      type: 'POST',
+      data: formData,
+      // prevent formData from converting it to a string
+      processData: false,
+      // used for forms submitting files, it forces jQuery NOT to add a content type header with this request
+      contentType: false,
+      success: (data) => {
+        console.log('data in success callback =', data);
+        location.reload();
+      },
+    });
+  });
 });
 
 // Click on like button
