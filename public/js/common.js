@@ -68,21 +68,21 @@ $('#deletePostModal').on('show.bs.modal', (event) => {
   const button = $(event.relatedTarget);
   const postId = getPostIdFromElement(button);
   $('#deletePostButton').data('id', postId);
+});
 
-  $('#deletePostButton').click((event) => {
-    const id = $(event.target).data('id');
+$('#deletePostButton').click((event) => {
+  const id = $(event.target).data('id');
 
-    $.ajax({
-      url: `/api/posts/${id}`,
-      type: 'DELETE',
-      success: (data, status, xhr) => {
-        if (xhr.status !== 202) {
-          alert('Failed to delete the post.');
-          return;
-        }
-        location.reload();
-      },
-    });
+  $.ajax({
+    url: `/api/posts/${id}`,
+    type: 'DELETE',
+    success: (data, status, xhr) => {
+      if (xhr.status !== 202) {
+        alert('Failed to delete the post.');
+        return;
+      }
+      location.reload();
+    },
   });
 });
 
