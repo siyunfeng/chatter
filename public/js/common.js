@@ -1,3 +1,6 @@
+// Global Variables
+let cropper;
+
 // New post/reply editing & submit button interaction
 $('#postTextarea, #replyTextarea').keyup((event) => {
   const textbox = $(event.target);
@@ -70,6 +73,7 @@ $('#deletePostModal').on('show.bs.modal', (event) => {
   $('#deletePostButton').data('id', postId);
 });
 
+// Send DELETE request to posts API route to delete specific post
 $('#deletePostButton').click((event) => {
   const id = $(event.target).data('id');
 
@@ -84,6 +88,31 @@ $('#deletePostButton').click((event) => {
       location.reload();
     },
   });
+});
+
+//
+$('#fileImage').change((event) => {
+  const input = $(event.target)[0];
+  console.log('input.files =', input.files, 'input.files[0] =', input.files[0]);
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      let image = document.getElementById('imagePreview');
+      image.src = event.target.result;
+
+      if (cropper !== undefined) {
+        cropper.destroy();
+      }
+      // need to write in JavaScript not jQuery
+      cropper = new Cropper(image, {
+        aspectRatio: 1 / 1,
+        background: false,
+      });
+    };
+    reader.readAsDataURL(input.files[0]);
+  } else {
+    console.log('nope');
+  }
 });
 
 // Click on like button
