@@ -32,6 +32,7 @@ router.get('/', async (req, res, next) => {
         objectIds.push(followingUser);
       });
 
+      objectIds.push(user._id);
       searchObj.postedBy = { $in: objectIds };
     }
     delete searchObj.followingOnly;
