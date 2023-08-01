@@ -169,6 +169,20 @@ router.delete('/:id', async (req, res, next) => {
   }
 });
 
+// pin existing post
+router.put('/:id', async (req, res, next) => {
+  try {
+    if (req.body.pinned !== undefined) {
+      await Post.updateMany({ postedBy: req.session.user }, { pinned: false });
+      await Post.findByIdAndUpdate(req.params.id, req.body);
+      res.sendStatus(204);
+    }
+  } catch (error) {
+    console.log('posts pin post PUT request error: ', error);
+    res.sendStatus(400);
+  }
+});
+
 // get post details with specific filters
 const getPosts = async (postFilter) => {
   try {

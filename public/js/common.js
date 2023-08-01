@@ -73,6 +73,13 @@ $('#deletePostModal').on('show.bs.modal', (event) => {
   $('#deletePostButton').data('id', postId);
 });
 
+// Click on pin button in user's post container
+$('#pinPostModal').on('show.bs.modal', (event) => {
+  const button = $(event.relatedTarget);
+  const postId = getPostIdFromElement(button);
+  $('#pinPostButton').data('id', postId);
+});
+
 // Send DELETE request to posts API route to delete specific post
 $('#deletePostButton').click((event) => {
   const id = $(event.target).data('id');
@@ -83,6 +90,24 @@ $('#deletePostButton').click((event) => {
     success: (data, status, xhr) => {
       if (xhr.status !== 202) {
         alert('Failed to delete the post.');
+        return;
+      }
+      location.reload();
+    },
+  });
+});
+
+// Send PUT request to posts API route to modify pinned status of specific post
+$('#pinPostButton').click((event) => {
+  const id = $(event.target).data('id');
+
+  $.ajax({
+    url: `/api/posts/${id}`,
+    type: 'PUT',
+    data: { pinned: true },
+    success: (data, status, xhr) => {
+      if (xhr.status !== 204) {
+        alert('Failed to pin the post.');
         return;
       }
       location.reload();
@@ -336,7 +361,12 @@ const createPostHtml = (postData, largeFont = false) => {
 
   let buttons = '';
   if (postedBy._id === loggedInUser._id) {
-    buttons = `<button data-id='${postData._id}' data-bs-toggle='modal' data-bs-target='#deletePostModal'><i class='far fa-trash-can'></i></button>`;
+    buttons = `<button data-id='${postData._id}' data-bs-toggle='modal' data-bs-target='#pinPostModal'>
+                <i class='fas fa-thumbtack'></i>
+              </button>
+              <button data-id='${postData._id}' data-bs-toggle='modal' data-bs-target='#deletePostModal'>
+                <i class='far fa-trash-can'></i>
+              </button>`;
   }
 
   return `<div class='post ${largeFontClass}' data-id=${postData._id}>

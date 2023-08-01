@@ -33,10 +33,11 @@ mixin createDeletePostModal()
         .modal-dialog
             .modal-content
                 .modal-header
-                    h1#deletePostModalLabel.modal-title.fs-5 Delete the post?
+                    h1#deletePostModalLabel.modal-title.fs-5 Delete this post?
                     button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
                 .modal-body
-                    p You won't be able to delete this.
+                    p ⚠️ You cannot undo the delete. 
+                    p Please make sure this is the post you want to delete. 
                 .modal-footer
                     button.btn.btn-secondary(type='button', data-bs-dismiss='modal') Cancel
                     button#deletePostButton.btn.btn-primary(type='button') Delete
@@ -44,6 +45,7 @@ mixin createDeletePostModal()
 mixin createPostModals(loggedInUser)
     +createReplyModal(loggedInUser)
     +createDeletePostModal()
+    +createPinnedPostModal()
 
 mixin createFollowButton(user, isFollowing)
     - buttonText = isFollowing ? 'Following' : 'Follow' 
@@ -86,3 +88,17 @@ mixin createCoverImageUploadModal()
                 .modal-footer
                     button.btn.btn-secondary(type='button', data-bs-dismiss='modal') Cancel
                     button#coverImageUploadButton.btn.btn-primary(type='button') Save
+
+mixin createPinnedPostModal()
+    #pinPostModal.modal.fade(tabindex='-1', aria-labelledby='pinPostModalLabel', aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h1#pinPostModalLabel.modal-title.fs-5 Pin this post?
+                    button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                .modal-body
+                    p 📌 This post will appear at the top of your profile page. 
+                    p ⚠️ You can only pin one post. 
+                .modal-footer
+                    button.btn.btn-secondary(type='button', data-bs-dismiss='modal') Cancel
+                    button#pinPostButton.btn.btn-primary(type='button') Pin
