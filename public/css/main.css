@@ -418,3 +418,12 @@ button span {
     display: block;
     max-width: 100%;
 }
+
+.pinButton.pinned {
+    color: var(--redCarol);
+}
+
+.pinnedPostText {
+    font-size: 13px;
+    color: var(--greyText);
+}

@@ -360,8 +360,16 @@ const createPostHtml = (postData, largeFont = false) => {
   }
 
   let buttons = '';
+  let pinnedPostText = '';
   if (postedBy._id === loggedInUser._id) {
-    buttons = `<button data-id='${postData._id}' data-bs-toggle='modal' data-bs-target='#pinPostModal'>
+    let pinnedClass = '';
+
+    if (postData.pinned === true) {
+      pinnedClass = 'pinned';
+      pinnedPostText = `<i class='fas fa-thumbtack'></i><span> Pinned post</span>`;
+    }
+
+    buttons = `<button class='pinButton ${pinnedClass}' data-id='${postData._id}' data-bs-toggle='modal' data-bs-target='#pinPostModal'>
                 <i class='fas fa-thumbtack'></i>
               </button>
               <button data-id='${postData._id}' data-bs-toggle='modal' data-bs-target='#deletePostModal'>
@@ -374,12 +382,13 @@ const createPostHtml = (postData, largeFont = false) => {
               ${repostText}
             </div>
             <div class='mainContentContainer'>
-                 <div class='userImageContainer'>
+                <div class='userImageContainer'>
                     <img src=${profileImage} />
                 </div>
                 <div class='postContentContainer'>
-                    <div class='postHeader'>
-                        <a href='/profile/${username}' class='displayName'>
+                  <div class='pinnedPostText'>${pinnedPostText}</div>
+                <div class='postHeader'>
+                  <a href='/profile/${username}' class='displayName'>
                             ${firstName} ${lastName}
                         </a>
                         <span class='username'>@${username}</span>
@@ -411,7 +420,7 @@ const createPostHtml = (postData, largeFont = false) => {
                     </div>
                 </div>
             </div>
-        </div>`;
+          </div>`;
 };
 
 // Time interval conversion
