@@ -107,4 +107,40 @@ router.post(
   }
 );
 
+// create user cover image
+router.post(
+  '/coverImage',
+  upload.single('croppedImage'),
+  async (req, res, next) => {
+    try {
+      if (!req.file) {
+        console.log('No file uploaded with ajax request');
+        return res.sendStatus(400);
+      }
+
+      let filePath = `/uploads/images/${req.file.filename}.png`;
+      let tempPath = req.file.path;
+      let targetPath = path.join(__dirname, `../../${filePath}`);
+
+      fs.rename(tempPath, targetPath, async (error) => {
+        if (error) {
+          console.log('fs.rename error: ', error);
+          return res.sendStatus(400);
+        }
+
+        req.session.user = await User.findByIdAndUpdate(
+          req.session.user._id,
+          { coverImage: filePath },
+          { new: true }
+        );
+
+        res.sendStatus(204);
+      });
+    } catch (error) {
+      console.log('users route cover image POST request error: ', error);
+      res.sendStatus(400);
+    }
+  }
+);
+
 module.exports = router;

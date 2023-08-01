@@ -266,7 +266,7 @@ button span {
     padding: var(--spacingEdge);
 }
 
-.profileHeaderContainer .coverPhotoContainer {
+.coverAndUserImagesContainer {
     height: 180px;
     background-color: var(--blueLight);
     position: relative;
@@ -386,18 +386,34 @@ button span {
     padding: 0 var(--spacingEdge);
 }
 
-.profileImageButton {
+.profileImageButton,
+.coverImageButton {
     position: absolute;
     font-size: 50px;
     color: white;
     display: none;
 }
 
-.userImageContainer:hover .profileImageButton {
+.userImageContainer:hover .profileImageButton,
+.coverAndUserImagesContainer:hover .coverImageButton {
     display: block;
 }
 
-#imagePreview {
+.coverImageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.coverImageContainer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#imagePreview,
+#coverPreview {
     width: 100%;
     display: block;
     max-width: 100%;

@@ -9,6 +9,7 @@ const UserModel = new Schema(
     email: { type: String, required: true, trim: true, unique: true },
     password: { type: String, required: true },
     profileImage: { type: String, default: '/images/defaultprofileImage.png' },
+    coverImage: { type: String },
     likes: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
     reposts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
     followings: [{ type: Schema.Types.ObjectId, ref: 'User' }],

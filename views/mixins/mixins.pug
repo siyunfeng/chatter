@@ -60,7 +60,7 @@ mixin createImageUploadModal()
         .modal-dialog
             .modal-content
                 .modal-header
-                    h1#imageUploadModalLabel.modal-title.fs-5 Upload a new profile Image
+                    h1#imageUploadModalLabel.modal-title.fs-5 Upload a new profile image
                     button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
                 .modal-body
                     input#fileImage(type='file', name='fileImage')
@@ -70,3 +70,19 @@ mixin createImageUploadModal()
                 .modal-footer
                     button.btn.btn-secondary(type='button', data-bs-dismiss='modal') Cancel
                     button#imageUploadButton.btn.btn-primary(type='button') Save
+
+mixin createCoverImageUploadModal()
+    #coverImageUploadModal.modal.fade(tabindex='-1', aria-labelledby='coverImageUploadModalLabel', aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h1#coverImageUploadModalLabel.modal-title.fs-5 Upload a new cover image
+                    button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                .modal-body
+                    input#coverImage(type='file', name='coverImage')
+
+                    .imagePreviewContainer 
+                        img#coverPreview
+                .modal-footer
+                    button.btn.btn-secondary(type='button', data-bs-dismiss='modal') Cancel
+                    button#coverImageUploadButton.btn.btn-primary(type='button') Save

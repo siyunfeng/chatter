@@ -93,7 +93,7 @@ $('#deletePostButton').click((event) => {
 // Modal for uploading profile image
 $('#fileImage').change((event) => {
   const input = $(event.target)[0];
-  // console.log('input.files =', input.files, 'input.files[0] =', input.files[0]);
+
   if (input.files && input.files[0]) {
     const reader = new FileReader();
     reader.onload = (event) => {
@@ -110,8 +110,29 @@ $('#fileImage').change((event) => {
       });
     };
     reader.readAsDataURL(input.files[0]);
-  } else {
-    console.log('nope');
+  }
+});
+
+// Modal for uploading cover image
+$('#coverImage').change((event) => {
+  const input = $(event.target)[0];
+
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      let image = document.getElementById('coverPreview');
+      image.src = event.target.result;
+
+      if (cropper !== undefined) {
+        cropper.destroy();
+      }
+
+      cropper = new Cropper(image, {
+        aspectRatio: 16 / 9,
+        background: false,
+      });
+    };
+    reader.readAsDataURL(input.files[0]);
   }
 });
 
@@ -136,8 +157,33 @@ $('#imageUploadButton').click(() => {
       processData: false,
       // used for forms submitting files, it forces jQuery NOT to add a content type header with this request
       contentType: false,
-      success: (data) => {
-        console.log('data in success callback =', data);
+      success: () => {
+        location.reload();
+      },
+    });
+  });
+});
+
+// Submit cover image uploading
+$('#coverImageUploadButton').click(() => {
+  let canvas = cropper.getCroppedCanvas();
+
+  if (!canvas) {
+    alert('Could not upload this file. Please make sure it is an image file.');
+    return;
+  }
+
+  canvas.toBlob((blob) => {
+    let formData = new FormData();
+    formData.append('croppedImage', blob);
+
+    $.ajax({
+      url: '/api/users/coverImage',
+      type: 'POST',
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: () => {
         location.reload();
       },
     });
