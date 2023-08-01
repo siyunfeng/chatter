@@ -15,7 +15,7 @@ block content
             .coverPhotoContainer 
 
                 .userImageContainer 
-                    img(src=profileUser.profileImg, alt='User profile image')
+                    img(src=profileUser.profileImage, alt='User profile image')
 
                     if profileUser._id === loggedInUser._id 
                         button.profileImageButton(data-bs-toggle='modal', data-bs-target='#imageUploadModal')

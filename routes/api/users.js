@@ -86,13 +86,19 @@ router.post(
       let tempPath = req.file.path;
       let targetPath = path.join(__dirname, `../../${filePath}`);
 
-      fs.rename(tempPath, targetPath, (error) => {
+      fs.rename(tempPath, targetPath, async (error) => {
         if (error) {
           console.log('fs.rename error: ', error);
           return res.sendStatus(400);
         }
 
-        res.sendStatus(200);
+        req.session.user = await User.findByIdAndUpdate(
+          req.session.user._id,
+          { profileImage: filePath },
+          { new: true }
+        );
+
+        res.sendStatus(204);
       });
     } catch (error) {
       console.log('users route profile image POST request error: ', error);

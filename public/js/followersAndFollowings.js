@@ -32,7 +32,7 @@ const getUsersNetwork = (userNetwork, container) => {
 };
 
 const createNetworkHtml = (userData, showFollowButton) => {
-  const { firstName, lastName, username, profileImg } = userData;
+  const { firstName, lastName, username, profileImage } = userData;
 
   let isFollowing = loggedInUser.followings?.includes(userData._id);
 
@@ -47,7 +47,7 @@ const createNetworkHtml = (userData, showFollowButton) => {
 
   return `<div class='user'>
             <div class='userImageContainer'>
-                <img src='${profileImg}' />
+                <img src='${profileImage}' />
             </div>
             <div class='userDetailsContainer'>
                 <div class='header'>

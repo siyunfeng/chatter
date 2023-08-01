@@ -258,7 +258,7 @@ const createPostHtml = (postData, largeFont = false) => {
     repostData,
     replyTo,
   } = postData;
-  const { firstName, lastName, username, profileImg } = postedBy;
+  const { firstName, lastName, username, profileImage } = postedBy;
 
   if (postData._id === undefined) {
     console.log('User object not populated.');
@@ -299,7 +299,7 @@ const createPostHtml = (postData, largeFont = false) => {
             </div>
             <div class='mainContentContainer'>
                  <div class='userImageContainer'>
-                    <img src=${profileImg} />
+                    <img src=${profileImage} />
                 </div>
                 <div class='postContentContainer'>
                     <div class='postHeader'>

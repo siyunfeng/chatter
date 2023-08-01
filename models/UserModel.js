@@ -8,7 +8,7 @@ const UserModel = new Schema(
     username: { type: String, required: true, trim: true, unique: true },
     email: { type: String, required: true, trim: true, unique: true },
     password: { type: String, required: true },
-    profileImg: { type: String, default: '/images/defaultProfileImg.png' },
+    profileImage: { type: String, default: '/images/defaultprofileImage.png' },
     likes: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
     reposts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
     followings: [{ type: Schema.Types.ObjectId, ref: 'User' }],
