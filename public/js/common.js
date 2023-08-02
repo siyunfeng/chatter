@@ -66,18 +66,25 @@ $('#replyModal').on('hidden.bs.modal', () => {
   $('#originalPostContainer').html('');
 });
 
-// Click on delete button in user's post container
+// Update post id to the delete post button
 $('#deletePostModal').on('show.bs.modal', (event) => {
   const button = $(event.relatedTarget);
   const postId = getPostIdFromElement(button);
   $('#deletePostButton').data('id', postId);
 });
 
-// Click on pin button in user's post container
+// Update post id to the pin post button
 $('#pinPostModal').on('show.bs.modal', (event) => {
   const button = $(event.relatedTarget);
   const postId = getPostIdFromElement(button);
   $('#pinPostButton').data('id', postId);
+});
+
+// Update post id to the unpin post button
+$('#unpinPostModal').on('show.bs.modal', (event) => {
+  const button = $(event.relatedTarget);
+  const postId = getPostIdFromElement(button);
+  $('#unpinPostButton').data('id', postId);
 });
 
 // Send DELETE request to posts API route to delete specific post
@@ -105,6 +112,24 @@ $('#pinPostButton').click((event) => {
     url: `/api/posts/${id}`,
     type: 'PUT',
     data: { pinned: true },
+    success: (data, status, xhr) => {
+      if (xhr.status !== 204) {
+        alert('Failed to pin the post.');
+        return;
+      }
+      location.reload();
+    },
+  });
+});
+
+// Send PUT request to posts API route to modify pinned post to unpinned post
+$('#unpinPostButton').click((event) => {
+  const id = $(event.target).data('id');
+
+  $.ajax({
+    url: `/api/posts/${id}`,
+    type: 'PUT',
+    data: { pinned: false },
     success: (data, status, xhr) => {
       if (xhr.status !== 204) {
         alert('Failed to pin the post.');
@@ -363,13 +388,14 @@ const createPostHtml = (postData, largeFont = false) => {
   let pinnedPostText = '';
   if (postedBy._id === loggedInUser._id) {
     let pinnedClass = '';
-
+    let dataTarget = '#pinPostModal';
     if (postData.pinned === true) {
       pinnedClass = 'pinned';
+      dataTarget = '#unpinPostModal';
       pinnedPostText = `<i class='fas fa-thumbtack'></i><span> Pinned post</span>`;
     }
 
-    buttons = `<button class='pinButton ${pinnedClass}' data-id='${postData._id}' data-bs-toggle='modal' data-bs-target='#pinPostModal'>
+    buttons = `<button class='pinButton ${pinnedClass}' data-id='${postData._id}' data-bs-toggle='modal' data-bs-target='${dataTarget}'>
                 <i class='fas fa-thumbtack'></i>
               </button>
               <button data-id='${postData._id}' data-bs-toggle='modal' data-bs-target='#deletePostModal'>
@@ -478,6 +504,21 @@ const userPosts = (posts, container) => {
       `<span class='noPosts'>This user have not posted yet. </span>`
     );
   }
+};
+
+// Invoke generate pinned post content within specific container
+const userPinnedPost = (posts, container) => {
+  if (posts.length === 0) {
+    container.hide();
+    return;
+  }
+
+  container.html('');
+
+  posts.forEach((post) => {
+    const html = createPostHtml(post);
+    container.append(html);
+  });
 };
 
 // Genertae posts details with replies

@@ -7,6 +7,10 @@ $(document).ready(() => {
 });
 
 const loadPosts = () => {
+  $.get('/api/posts', { postedBy: profileUserId, pinned: true }, (post) => {
+    userPinnedPost(post, $('.pinnedPostContainter'));
+  });
+
   $.get('/api/posts', { postedBy: profileUserId, isReply: false }, (posts) => {
     userPosts(posts, $('.postsContainter'));
   });

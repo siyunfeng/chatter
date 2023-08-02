@@ -254,6 +254,10 @@ button span {
     color: var(--blue)
 }
 
+.postBody {
+    padding: 5px 0;
+}
+
 .post.largeFont .postBody, 
 .post.largeFont .postFooter {
     font-size: 19px;
@@ -426,4 +430,8 @@ button span {
 .pinnedPostText {
     font-size: 13px;
     color: var(--greyText);
+}
+
+.pinnedPostContainter {
+    border-bottom: 3px inset var(--greyLine);
 }
