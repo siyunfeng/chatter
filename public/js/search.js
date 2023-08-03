@@ -24,6 +24,7 @@ const search = (searchTerm, searchType) => {
     if (searchType === 'posts') {
       userPosts(results, $('.resultsContainer'));
     } else {
+      getUsers(results, $('.resultsContainer'));
     }
   });
 };

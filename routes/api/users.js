@@ -11,6 +11,30 @@ const Post = require('../../models/PostModel');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// get specific users
+router.get('/', async (req, res, next) => {
+  try {
+    let searchObj = req.query;
+    let { search } = req.query;
+
+    if (search !== undefined) {
+      searchObj = {
+        $or: [
+          { firstName: { $regex: search, $options: 'i' } },
+          { lastName: { $regex: search, $options: 'i' } },
+          { username: { $regex: search, $options: 'i' } },
+        ],
+      };
+    }
+
+    const userList = await User.find(searchObj);
+    res.status(200).send(userList);
+  } catch (error) {
+    console.log('users route root GET request error: ', error);
+    res.sendStatus(400);
+  }
+});
+
 // get all follow
 router.put('/:userId/follow', async (req, res, next) => {
   try {

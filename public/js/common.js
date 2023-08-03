@@ -500,9 +500,7 @@ const userPosts = (posts, container) => {
   });
 
   if (!posts.length) {
-    container.append(
-      `<span class='noPosts'>This user have not posted yet. </span>`
-    );
+    container.append(`<span class='noPosts'>No result found. </span>`);
   }
 };
 
