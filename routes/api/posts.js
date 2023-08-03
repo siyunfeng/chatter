@@ -18,6 +18,13 @@ router.get('/', async (req, res, next) => {
     delete searchObj.isReply;
   }
 
+  if (searchObj.search !== undefined) {
+    /* $regex provides regular expression capabilities for pattern matching strings in queries.
+       $options: 'i' is for case insensitivity to match upper and lower cases. */
+    searchObj.content = { $regex: searchObj.search, $options: 'i' };
+    delete searchObj.search;
+  }
+
   if (searchObj.followingOnly !== undefined) {
     const followingOnly = searchObj.followingOnly === 'true';
 

@@ -9,10 +9,21 @@ $('#searchBox').keydown((event) => {
   timer = setTimeout(() => {
     value = textbox.val().trim();
 
-    if (value === '') {
+    if (!value) {
       $('.resultsContainer').html('');
     } else {
-      console.log('value =', value, 'searchType =', searchType);
+      search(value, searchType);
     }
   }, 1000);
 });
+
+const search = (searchTerm, searchType) => {
+  let url = searchType === 'users' ? '/api/users' : '/api/posts';
+
+  $.get(url, { search: searchTerm }, (results) => {
+    if (searchType === 'posts') {
+      userPosts(results, $('.resultsContainer'));
+    } else {
+    }
+  });
+};
