@@ -8,13 +8,13 @@ $(document).ready(() => {
 
 const loadFollowers = () => {
   $.get(`/api/users/${profileUserId}/followers`, (userNetwork) => {
-    getUsersNetwork(userNetwork.followers, $('.networkResultsContainer'));
+    getUsersNetwork(userNetwork.followers, $('.resultsContainer'));
   });
 };
 
 const loadFollowing = () => {
   $.get(`/api/users/${profileUserId}/following`, (userNetwork) => {
-    getUsersNetwork(userNetwork.followings, $('.networkResultsContainer'));
+    getUsersNetwork(userNetwork.followings, $('.resultsContainer'));
   });
 };
 
