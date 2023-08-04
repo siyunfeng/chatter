@@ -2,6 +2,7 @@
 
 :root {
     --blue: rgb(88, 166, 255);
+    --blueDark: rgb(28, 134, 255);
     --blueHoverBg: rgb(88, 166, 255, 0.15);
     --blueLight: #9BD1F9;
     --yellow: #FFDE0A;
@@ -12,7 +13,8 @@
     --redCarol: #F95450;
     --pink: #f953501f;
     --greenLime: #66930C;
-    --greenLight: #66930c1a;
+    --greenMint: #D1ECB6;
+    --greenLight: #7fa4341a;
     --spacingEdge: 1rem;
     --fontArvo: 'Arvo';
     --fontBonaNova: 'Bona Nova';
@@ -500,4 +502,14 @@ button span {
     margin: 10px auto;
     border: none;
     border-radius: 40px;
+}
+
+.selectedUser {
+    display: inline-block;
+    font-weight: 200;
+    color: var(--greenLime);
+    background-color: var(--greenMint);
+    padding: 4px 8px;
+    margin: 5px 5px 0 0;
+    border-radius: 5px;
 }

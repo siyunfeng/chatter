@@ -1,6 +1,7 @@
 // Global Variables
 let cropper;
 let timer;
+let usersOptions = [];
 
 // New post/reply editing & submit button interaction
 $('#postTextarea, #replyTextarea').keyup((event) => {
@@ -246,9 +247,18 @@ $('#userSearchTextbox').keydown((event) => {
   let textbox = $(event.target);
   let value = textbox.val();
 
-  // keycode 8 represents the DELETE key
+  /* event.which 8 represents the DELETE key
+     event.keyCode 8 also represents the DELETE key in JavaScript but it's deprecated now because some browsers do not support */
+
   // remove user from selection
-  if (value === '' && event.keycode === 8) {
+  if (value === '' && (event.which === 8 || event.keyCode === 8)) {
+    usersOptions.pop();
+    updateUsersOptionsHtml();
+    $('.resultsContainer').html('');
+
+    if (usersOptions.length === 0) {
+      $('#createChatButton').prop('disabled', true);
+    }
     return;
   }
 
@@ -615,14 +625,47 @@ const outputUsersOptions = (users, container) => {
   container.html('');
 
   users.forEach((user) => {
-    if (user._id === loggedInUser._id) {
+    if (
+      user._id === loggedInUser._id ||
+      usersOptions.some((option) => option._id === user._id)
+    ) {
       return;
     }
-    const html = createUserListHtml(user, true);
-    container.append(html);
+
+    let html = createUserListHtml(user, false);
+
+    let element = $(html);
+    element.click(() => userSelected(user));
+
+    container.append(element);
   });
 
   if (!users.length) {
     container.append(`<span class='noResults'>No result found</span>`);
   }
+};
+
+const userSelected = (user) => {
+  usersOptions.push(user);
+  updateUsersOptionsHtml();
+  // clear the input and keep the key focus on the input textbox
+  $('#userSearchTextbox').val('').focus();
+  // clear the users options display after selecting one from the list
+  $('.resultsContainer').html('');
+  // active the create chat button
+  $('#createChatButton').prop('disabled', false);
+};
+
+const updateUsersOptionsHtml = () => {
+  let elements = [];
+
+  usersOptions.forEach((user) => {
+    let name = `${user.firstName} ${user.lastName}`;
+
+    let userElement = $(`<span class='selectedUser'>${name}</span>`);
+    elements.push(userElement);
+  });
+
+  $('.selectedUser').remove();
+  $('#selectedUsers').prepend(elements);
 };
