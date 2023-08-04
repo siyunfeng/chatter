@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Bona+Nova:wght@400;700&family=Libre+Franklin:wght@400;700&family=Quicksand:wght@400;700&family=Roboto:wght@400;700&family=Ubuntu:wght@400;700&family=Ysabeau+Infant:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Bona+Nova:wght@400;700&family=Libre+Franklin:wght@400;700&family=Borel&family=Quicksand:wght@400;700&family=Urbanist&family=Figtree&family=Roboto:wght@400;700&family=Ubuntu:wght@400;700&family=Ysabeau+Infant:wght@400;700&display=swap');
 
 :root {
     --blue: rgb(88, 166, 255);
@@ -21,6 +21,9 @@
     --fontQuicksand: 'Quicksand';
     --fontYsabeauInfant: 'Ysabeau Infant';
     --fontRoboto: 'Roboto';
+    --fontBorel: 'Borel';
+    --fontUrbanist: 'Urbanist';
+    --fontFigtree: 'Figtree';
 }
 
 * {

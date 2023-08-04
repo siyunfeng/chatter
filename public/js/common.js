@@ -500,7 +500,7 @@ const userPosts = (posts, container) => {
   });
 
   if (!posts.length) {
-    container.append(`<span class='noPosts'>No result found. </span>`);
+    container.append(`<span class='noPosts'>No result found</span>`);
   }
 };
 
@@ -547,7 +547,7 @@ const getUsers = (users, container) => {
   });
 
   if (!users.length) {
-    container.append(`<span class='noResults'>No result found. </span>`);
+    container.append(`<span class='noResults'>No result found</span>`);
   }
 };
 
