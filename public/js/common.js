@@ -1,5 +1,6 @@
 // Global Variables
 let cropper;
+let timer;
 
 // New post/reply editing & submit button interaction
 $('#postTextarea, #replyTextarea').keyup((event) => {
@@ -238,6 +239,28 @@ $('#coverImageUploadButton').click(() => {
       },
     });
   });
+});
+
+$('#userSearchTextbox').keydown((event) => {
+  clearTimeout(timer);
+  let textbox = $(event.target);
+  let value = textbox.val();
+
+  // keycode 8 represents the DELETE key
+  // remove user from selection
+  if (value === '' && event.keycode === 8) {
+    return;
+  }
+
+  timer = setTimeout(() => {
+    value = textbox.val().trim();
+
+    if (!value) {
+      $('.resultsContainer').html('');
+    } else {
+      searchUsers(value);
+    }
+  }, 1000);
 });
 
 // Click on like button
@@ -579,4 +602,27 @@ const createUserListHtml = (userData, showFollowButton) => {
             </div>
             ${followButton}
         </div>`;
+};
+
+// Search users by user input
+const searchUsers = (searchTerm) => {
+  $.get('/api/users', { search: searchTerm }, (users) => {
+    outputUsersOptions(users, $('.resultsContainer'));
+  });
+};
+
+const outputUsersOptions = (users, container) => {
+  container.html('');
+
+  users.forEach((user) => {
+    if (user._id === loggedInUser._id) {
+      return;
+    }
+    const html = createUserListHtml(user, true);
+    container.append(html);
+  });
+
+  if (!users.length) {
+    container.append(`<span class='noResults'>No result found</span>`);
+  }
 };
