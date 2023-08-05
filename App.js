@@ -46,9 +46,11 @@ app.use('/messages', requireLogin, messageRoute);
 // APIs
 const postAPIRoute = require('./routes/api/posts');
 const userAPIRoute = require('./routes/api/users');
+const chatAPIRoute = require('./routes/api/chats');
 
 app.use('/api/posts', postAPIRoute);
 app.use('/api/users', userAPIRoute);
+app.use('/api/chats', chatAPIRoute);
 
 app.get('/', requireLogin, (req, res, next) => {
   const payload = {
