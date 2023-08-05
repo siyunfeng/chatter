@@ -8,6 +8,7 @@ const Chat = require('../../models/ChatModel');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// create a new chat page
 router.post('/', async (req, res, next) => {
   try {
     if (!req.body.users) {
@@ -29,6 +30,18 @@ router.post('/', async (req, res, next) => {
     res.status(200).send(newChat);
   } catch (error) {
     console.log('chats route POST request error: ', error);
+    res.sendStatus(400);
+  }
+});
+
+router.get('/', async (req, res, next) => {
+  try {
+    let newChat = await Chat.find({ users: req.session.user._id }).populate(
+      'users'
+    );
+    res.status(200).send(newChat);
+  } catch (error) {
+    console.log('chats route GET request error: ', error);
     res.sendStatus(400);
   }
 });
