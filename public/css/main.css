@@ -513,3 +513,32 @@ button span {
     margin: 5px 5px 0 0;
     border-radius: 5px;
 }
+
+/* Inbox Page */
+
+.resultListItem {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    padding: var(--spacingEdge);
+    border-bottom: 1px solid var(--greyLine);
+}
+
+.resultListItem:hover {
+    background-color: var(--blueHoverBg);
+}
+
+.resultsDetailsContainer {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.resultsDetailsContainer .heading {
+    font-weight: 500;
+}
+
+.resultsDetailsContainer .subText {
+    font-size: 14px;
+    color: var(--greyText);
+}
