@@ -242,6 +242,7 @@ $('#coverImageUploadButton').click(() => {
   });
 });
 
+// Handle different keydown scenarios of search textbox
 $('#userSearchTextbox').keydown((event) => {
   clearTimeout(timer);
   let textbox = $(event.target);
@@ -271,6 +272,18 @@ $('#userSearchTextbox').keydown((event) => {
       searchUsers(value);
     }
   }, 1000);
+});
+
+// Handle creat chat button on click
+$('#createChatButton').click((event) => {
+  const data = JSON.stringify(usersOptions);
+
+  $.post('/api/chats', { users: data }, (chat) => {
+    if (!chat || !chat._id) {
+      return alert('Unable to get chat or chatId from the server');
+    }
+    window.location.href = `/messages/${chat._id}`;
+  });
 });
 
 // Click on like button
