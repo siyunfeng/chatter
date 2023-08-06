@@ -21,14 +21,14 @@ const outputChatList = (chatList, container) => {
 
 const createChatHtml = (chatData) => {
   let chatName = getChatName(chatData);
-  let imageUrl = '';
+  let chatImage = getChatImageElements(chatData);
   let latestMessage = 'This is the lastest message.';
 
   return `<a href='/messages/${chatData._id}' class='resultListItem'>
-            <div class='resultsDetailsContainer'>
-                <span class='heading'>${chatName}</span>
-                <span class='subText'>${latestMessage}</span>
-
+            ${chatImage}
+            <div class='resultsDetailsContainer ellipsis'>
+              <span class='heading ellipsis'>${chatName}</span>
+              <span class='subText ellipsis'>${latestMessage}</span>
             </div>
           </a>`;
 };
@@ -52,4 +52,26 @@ const getUsersToChatWith = (users) => {
 
   let usersList = users.filter((user) => user._id !== loggedInUser._id);
   return usersList;
+};
+
+const getChatImageElements = (chatData) => {
+  let usersToChatWith = getUsersToChatWith(chatData.users);
+
+  let groupChatClass = '';
+  let chatImage = getUserChatImageElement(usersToChatWith[0]);
+
+  if (usersToChatWith.length > 1) {
+    groupChatClass = 'groupChatImage';
+    chatImage += getUserChatImageElement(usersToChatWith[1]);
+  }
+
+  return `<div class='resultsImageContainer ${groupChatClass}'>${chatImage}</div>`;
+};
+
+const getUserChatImageElement = (user) => {
+  if (!user || !user.profileImage) {
+    return alert('User or user profile image not found');
+  }
+
+  return `<img src='${user.profileImage}' alt='user profile image' />`;
 };

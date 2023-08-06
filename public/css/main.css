@@ -542,3 +542,41 @@ button span {
     font-size: 14px;
     color: var(--greyText);
 }
+
+.resultListItem img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: 2px 2px 2px 1px rgba(128, 128, 128, 0.15), 3px 3px 3px 2px rgba(128, 128, 128, 0.1);
+}
+
+.resultsImageContainer {
+    display: flex;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    padding: 5px;
+    margin: 0 10px 0 0;
+}
+
+.groupChatImage img {
+    width: 65%;
+    height: 65%;
+    background-color: white;
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+    border: 2px solid white;
+}
+
+.groupChatImage img:first-of-type {
+    top: 0;
+    right: 0;
+}
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
