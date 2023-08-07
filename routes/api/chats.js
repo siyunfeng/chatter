@@ -34,11 +34,14 @@ router.post('/', async (req, res, next) => {
   }
 });
 
+// get chat by searching specific users, return the most recent chat(in descending order)
 router.get('/', async (req, res, next) => {
   try {
     let newChat = await Chat.find({
       users: { $elemMatch: { $eq: req.session.user._id } },
-    }).populate('users');
+    })
+      .populate('users')
+      .sort({ updatedAt: -1 });
     res.status(200).send(newChat);
   } catch (error) {
     console.log('chats route GET request error: ', error);
