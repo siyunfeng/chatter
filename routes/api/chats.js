@@ -36,9 +36,9 @@ router.post('/', async (req, res, next) => {
 
 router.get('/', async (req, res, next) => {
   try {
-    let newChat = await Chat.find({ users: req.session.user._id }).populate(
-      'users'
-    );
+    let newChat = await Chat.find({
+      users: { $elemMatch: { $eq: req.session.user._id } },
+    }).populate('users');
     res.status(200).send(newChat);
   } catch (error) {
     console.log('chats route GET request error: ', error);
