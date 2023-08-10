@@ -44,13 +44,15 @@ app.use('/search', requireLogin, searchRoute);
 app.use('/messages', requireLogin, messageRoute);
 
 // APIs
-const postAPIRoute = require('./routes/api/posts');
-const userAPIRoute = require('./routes/api/users');
-const chatAPIRoute = require('./routes/api/chats');
+const postsAPIRoute = require('./routes/api/posts');
+const usersAPIRoute = require('./routes/api/users');
+const chatsAPIRoute = require('./routes/api/chats');
+const messagesAPIRoute = require('./routes/api/messages');
 
-app.use('/api/posts', postAPIRoute);
-app.use('/api/users', userAPIRoute);
-app.use('/api/chats', chatAPIRoute);
+app.use('/api/posts', postsAPIRoute);
+app.use('/api/users', usersAPIRoute);
+app.use('/api/chats', chatsAPIRoute);
+app.use('/api/messages', messagesAPIRoute);
 
 app.get('/', requireLogin, (req, res, next) => {
   const payload = {
