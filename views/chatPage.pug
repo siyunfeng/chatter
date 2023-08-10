@@ -11,7 +11,7 @@ block content
         .chatPageContainer
             .chatTitleBarContainer 
                 +createChatImage(chat, loggedInUser)
-                span#chatName(data-bs-toggle='modal', data-bs-target='#chatNameModal') This is the chat 
+                span#chatName(data-bs-toggle='modal', data-bs-target='#chatNameModal') #{chat.chatName}
             
             .mainContentContainer 
                 .chatContainer 
