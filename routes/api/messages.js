@@ -9,7 +9,7 @@ const Message = require('../../models/MessageModel');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// create a new chat page
+// create a new message
 router.post('/', async (req, res, next) => {
   try {
     const { content, chatId } = req.body;
