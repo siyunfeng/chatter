@@ -4,6 +4,7 @@ $(document).ready(() => {
   });
 });
 
+// send PUT request to /api/chats to update chat name
 $('#chatNameButton').click(() => {
   let name = $('#chatNameTextbox').val().trim();
 
@@ -20,3 +21,28 @@ $('#chatNameButton').click(() => {
     },
   });
 });
+
+$('.messageInputTextBox').keydown((event) => {
+  if (event.which === 13) {
+    submitMessage();
+    return false;
+  }
+});
+
+$('.sendMessageButton').click(() => {
+  submitMessage();
+});
+
+const submitMessage = () => {
+  let content = $('.messageInputTextBox').val().trim();
+  if (content) {
+    sendMessage(content);
+    $('.messageInputTextBox').val('');
+  }
+};
+
+const sendMessage = (content) => {
+  $.post(`/api/messages`, { content, chatId }, (data, status, xhr) => {
+    console.log('message: ', data);
+  });
+};
