@@ -682,3 +682,24 @@ const updateUsersOptionsHtml = () => {
   $('.selectedUser').remove();
   $('#selectedUsers').prepend(elements);
 };
+
+const getChatName = (chatData) => {
+  let chatName = chatData.chatName;
+
+  if (!chatName) {
+    let usersToChatWith = getUsersToChatWith(chatData.users);
+    let namesArray = usersToChatWith.map(
+      (user) => `${user.firstName} ${user.lastName}`
+    );
+    chatName = namesArray.join(', ');
+  }
+
+  return chatName;
+};
+
+const getUsersToChatWith = (users) => {
+  if (users.length === 1) return users;
+
+  let usersList = users.filter((user) => user._id !== loggedInUser._id);
+  return usersList;
+};
