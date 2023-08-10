@@ -42,9 +42,40 @@ router.get('/', async (req, res, next) => {
     })
       .populate('users')
       .sort({ updatedAt: -1 });
+
     res.status(200).send(newChat);
   } catch (error) {
     console.log('chats route GET request error: ', error);
+    res.sendStatus(400);
+  }
+});
+
+// get specific chat info, includs chat name
+router.get('/:chatId', async (req, res, next) => {
+  try {
+    const { chatId } = req.params;
+
+    let chat = await Chat.findOne({
+      _id: chatId,
+      users: { $elemMatch: { $eq: req.session.user._id } },
+    }).populate('users');
+
+    res.status(200).send(chat);
+  } catch (error) {
+    console.log('chats route specific chat GET request error: ', error);
+    res.sendStatus(400);
+  }
+});
+
+// update chat name
+router.put('/:chatId', async (req, res, next) => {
+  try {
+    const { chatId } = req.params;
+    // req.body is everything we pass by the PUT request, data: {chatName: name}
+    await Chat.findByIdAndUpdate(chatId, req.body);
+    res.sendStatus(204);
+  } catch (error) {
+    console.log('chats route update chat name PUT request error: ', error);
     res.sendStatus(400);
   }
 });
