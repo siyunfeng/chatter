@@ -43,6 +43,27 @@ const submitMessage = () => {
 
 const sendMessage = (content) => {
   $.post(`/api/messages`, { content, chatId }, (data, status, xhr) => {
-    console.log('message: ', data);
+    addChatMessageHtml(data);
   });
+};
+
+const addChatMessageHtml = (message) => {
+  if (!message || !message._id) {
+    alert('Message is not valid');
+    return;
+  }
+
+  let messageDiv = createMessageHtml(message);
+
+  $('.chatMessages').append(messageDiv);
+};
+
+const createMessageHtml = (message) => {
+  let isMine = message.sender._id === loggedInUser._id;
+  let liClassName = isMine ? 'msgFromOwn' : 'msgFromOthers';
+  return `<li class='message ${liClassName}'>
+      <div class='messageContainer'>
+        <span class='messageBody'>${message.content}</span>
+      </div>
+    </li>`;
 };
