@@ -25,7 +25,10 @@ router.post('/', async (req, res, next) => {
       chat: chatId,
     };
 
-    const message = await Message.create(newMessage);
+    let message = await Message.create(newMessage);
+    message = await message.populate('sender');
+    message = await message.populate('chat');
+
     res.status(201).send(message);
   } catch (error) {
     console.log('/api/messages route POST request error: ', error);
