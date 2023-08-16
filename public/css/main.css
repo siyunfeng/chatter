@@ -7,6 +7,7 @@
     --blueLight: #9BD1F9;
     --yellow: #FFDE0A;
     --greyLine: #DBDCDA;
+    --greyLight: #F1F0F0;
     --greyText: #82807F;
     --blackLight: #212121;
     --blackTransparent: #21212175;
@@ -38,6 +39,8 @@ body {
 
 * {
     font-family: var(--fontRoboto), sans-serif;
+    overflow: visible;
+    overflow-wrap: anywhere;
 }
 
 a {
@@ -687,4 +690,35 @@ button span {
     width: 100%;
     border: none;
     padding: 5px 0;
+}
+
+.chatMessages .message {
+    display: flex;
+    align-items: flex-end;
+    flex-shrink: 0;
+    padding: 0 0 2px 0;
+    list-style: none;
+}
+
+.chatMessages .message .messageContainer {
+    display: flex;
+    flex-direction: column;
+    max-width: 55%;
+}
+
+.chatMessages .message .messageBody {
+    font-size: 15px;
+    background-color: var(--greenLight);
+    padding: 6px 12px;
+    border-radius: 15px;
+}
+
+.chatMessages .message.msgFromMine {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.chatMessages .message.msgFromMine .messageBody {
+    color: white;
+    background-color: var(--blue);
 }

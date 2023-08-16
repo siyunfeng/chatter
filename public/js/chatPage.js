@@ -60,10 +60,10 @@ const addChatMessageHtml = (message) => {
 
 const createMessageHtml = (message) => {
   let isMine = message.sender._id === loggedInUser._id;
-  let liClassName = isMine ? 'msgFromOwn' : 'msgFromOthers';
+  let liClassName = isMine ? 'msgFromMine' : 'msgFromOthers';
   return `<li class='message ${liClassName}'>
       <div class='messageContainer'>
-        <span class='messageBody'>${message.content}</span>
+        <p class='messageBody'>${message.content}</p>
       </div>
     </li>`;
 };
