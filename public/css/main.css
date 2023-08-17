@@ -660,6 +660,7 @@ img {
     flex-direction: column;
     flex: 1;
     padding: var(--spacingEdge);
+    margin: 0;
 }
 
 .chatImagesContainer {
@@ -713,9 +714,10 @@ img {
 
 .chatMessages .message .messageBody {
     font-size: 15px;
-    background-color: var(--greenLight);
+    background-color: var(--greyLight);
     padding: 6px 12px;
     border-radius: 15px;
+    margin: 0 0 5px 0;
 }
 
 .chatMessages .message.msgFromMine {
