@@ -2,6 +2,19 @@ $(document).ready(() => {
   $.get(`/api/chats/${chatId}`, (data) => {
     $('#chatName').text(getChatName(data));
   });
+
+  $.get(`/api/chats/${chatId}/messages`, (data) => {
+    let messages = [];
+
+    data.forEach((message) => {
+      let html = createMessageHtml(message);
+      messages.push(html);
+    });
+
+    let messagesHtml = messages.join('');
+
+    addMessagesHtmlToPage(messagesHtml);
+  });
 });
 
 // send PUT request to /api/chats to update chat name
@@ -22,6 +35,7 @@ $('#chatNameButton').click(() => {
   });
 });
 
+// event listener for if user press enter key to send message
 $('.messageInputTextBox').keydown((event) => {
   if (event.which === 13) {
     submitMessage();
@@ -29,6 +43,7 @@ $('.messageInputTextBox').keydown((event) => {
   }
 });
 
+// event listener for if user click on send button to send message
 $('.sendMessageButton').click(() => {
   submitMessage();
 });
@@ -60,7 +75,11 @@ const addChatMessageHtml = (message) => {
 
   let messageDiv = createMessageHtml(message);
 
-  $('.chatMessages').append(messageDiv);
+  addMessagesHtmlToPage(messageDiv);
+};
+
+const addMessagesHtmlToPage = (html) => {
+  $('.chatMessages').append(html);
 };
 
 const createMessageHtml = (message) => {
