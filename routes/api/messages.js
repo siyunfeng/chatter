@@ -29,6 +29,8 @@ router.post('/', async (req, res, next) => {
     message = await message.populate('sender');
     message = await message.populate('chat');
 
+    await Chat.findByIdAndUpdate(chatId, { latestMessage: message });
+
     res.status(201).send(message);
   } catch (error) {
     console.log('/api/messages route POST request error: ', error);

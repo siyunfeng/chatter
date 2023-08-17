@@ -41,7 +41,10 @@ router.get('/', async (req, res, next) => {
       users: { $elemMatch: { $eq: req.session.user._id } },
     })
       .populate('users')
+      .populate('latestMessage')
       .sort({ updatedAt: -1 });
+
+    newChat = await User.populate(newChat, { path: 'latestMessage.sender' });
 
     res.status(200).send(newChat);
   } catch (error) {
