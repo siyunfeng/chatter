@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const User = require('../../models/UserModel');
 const Post = require('../../models/PostModel');
 const Chat = require('../../models/ChatModel');
+const Message = require('../../models/MessageModel');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -53,7 +54,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-// get specific chat info, includs chat name
+// get specific chat info - chat name
 router.get('/:chatId', async (req, res, next) => {
   try {
     const { chatId } = req.params;
@@ -65,7 +66,10 @@ router.get('/:chatId', async (req, res, next) => {
 
     res.status(200).send(chat);
   } catch (error) {
-    console.log('chats route specific chat GET request error: ', error);
+    console.log(
+      'chats route specific chat(chat name) GET request error: ',
+      error
+    );
     res.sendStatus(400);
   }
 });
@@ -79,6 +83,23 @@ router.put('/:chatId', async (req, res, next) => {
     res.sendStatus(204);
   } catch (error) {
     console.log('chats route update chat name PUT request error: ', error);
+    res.sendStatus(400);
+  }
+});
+
+// get specific chat info - chat messages content
+router.get('/:chatId/messages', async (req, res, next) => {
+  try {
+    const { chatId } = req.params;
+
+    let chatContent = await Message.find({ chat: chatId }).populate('sender');
+
+    res.status(200).send(chatContent);
+  } catch (error) {
+    console.log(
+      'chats route specific chat(chat messages) GET request error: ',
+      error
+    );
     res.sendStatus(400);
   }
 });
