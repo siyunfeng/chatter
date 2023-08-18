@@ -17,6 +17,7 @@ $(document).ready(() => {
     let messagesHtml = messages.join('');
 
     addMessagesHtmlToPage(messagesHtml);
+    scrollToBottom(false);
   });
 });
 
@@ -79,6 +80,7 @@ const addChatMessageHtml = (message) => {
   let messageDiv = createMessageHtml(message, null, '');
 
   addMessagesHtmlToPage(messageDiv);
+  scrollToBottom(true);
 };
 
 const addMessagesHtmlToPage = (html) => {
@@ -123,4 +125,15 @@ const createMessageHtml = (message, nextMessage, lastSenderId) => {
             <p class='messageBody'>${message.content}</p>
             </div>
           </li>`;
+};
+
+const scrollToBottom = (animated) => {
+  const container = $('.chatMessages');
+  const { scrollHeight } = container[0];
+
+  if (animated) {
+    container.animate({ scrollTop: scrollHeight }, 'slow');
+  } else {
+    container.scrollTop(scrollHeight);
+  }
 };
