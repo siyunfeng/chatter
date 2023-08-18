@@ -769,3 +769,15 @@ img {
 .chatMessages .message.last-message {
     margin: 0 0 7px 0;
 }
+
+.loadingSpinnerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    margin: 50px auto;
+}
+
+.loadingSpinnerContainer img {
+    width: 100px;
+}
