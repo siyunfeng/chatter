@@ -5,10 +5,13 @@ $(document).ready(() => {
 
   $.get(`/api/chats/${chatId}/messages`, (data) => {
     let messages = [];
+    let lastSenderId = '';
 
-    data.forEach((message) => {
-      let html = createMessageHtml(message);
+    data.forEach((message, index) => {
+      let html = createMessageHtml(message, data[index + 1], lastSenderId);
       messages.push(html);
+
+      lastSenderId = message.sender._id;
     });
 
     let messagesHtml = messages.join('');
@@ -73,7 +76,7 @@ const addChatMessageHtml = (message) => {
     return;
   }
 
-  let messageDiv = createMessageHtml(message);
+  let messageDiv = createMessageHtml(message, null, '');
 
   addMessagesHtmlToPage(messageDiv);
 };
@@ -82,12 +85,42 @@ const addMessagesHtmlToPage = (html) => {
   $('.chatMessages').append(html);
 };
 
-const createMessageHtml = (message) => {
-  let isMine = message.sender._id === loggedInUser._id;
+const createMessageHtml = (message, nextMessage, lastSenderId) => {
+  let { sender } = message;
+  let senderName = `${sender.firstName} ${sender.lastName}`;
+
+  let currentSenderId = sender._id;
+  let nextSenderId = nextMessage ? nextMessage.sender._id : '';
+
+  let isFirstMessage = lastSenderId !== currentSenderId;
+  let isLastMessage = nextSenderId !== currentSenderId;
+
+  let isMine = sender._id === loggedInUser._id;
   let liClassName = isMine ? 'msgFromMine' : 'msgFromOthers';
+
+  let nameElement = '';
+  let imageContainer = '';
+  let profileImage = '';
+
+  if (isFirstMessage) {
+    liClassName += ' first-message';
+    if (!isMine) nameElement = `<span class='senderName'>${senderName}</span>`;
+  }
+
+  if (isLastMessage) {
+    liClassName += ' last-message';
+    profileImage = `<img src=${sender.profileImage} />`;
+  }
+
+  if (!isMine) {
+    imageContainer = `<div class='imageContainer'>${profileImage}</div>`;
+  }
+
   return `<li class='message ${liClassName}'>
-      <div class='messageContainer'>
-        <p class='messageBody'>${message.content}</p>
-      </div>
-    </li>`;
+            ${imageContainer}
+            <div class='messageContainer'>
+            ${nameElement}
+            <p class='messageBody'>${message.content}</p>
+            </div>
+          </li>`;
 };
