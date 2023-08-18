@@ -712,6 +712,14 @@ img {
     max-width: 55%;
 }
 
+.chatMessages .message.msgFromMine .messageContainer{
+    align-items: flex-end;
+}
+
+.chatMessages .message.msgFromOthers .messageContainer {
+    align-items: flex-start;
+}
+
 .chatMessages .message .messageBody {
     font-size: 15px;
     background-color: var(--greyLight);
@@ -728,4 +736,29 @@ img {
 .chatMessages .message.msgFromMine .messageBody {
     color: white;
     background-color: var(--blue);
+}
+
+.senderName {
+    color: var(--greyText);
+    font-size: 12px;
+}
+
+.chatMessages .imageContainer {
+    width: 30px;
+    height: 30px;
+    margin: 0 6px 6px 0;
+}
+
+.chatMessages .imageContainer img {
+    width: 100%;
+    height: 100%;
+    vertical-align: bottom;
+    border: 1px solid white;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 2px 2px 2px 1px rgba(128, 128, 128, 0.15), 3px 3px 3px 2px rgba(128, 128, 128, 0.1);
+}
+
+.chatMessages .message.last-message {
+    margin: 0 0 7px 0;
 }
