@@ -1,5 +1,10 @@
+let typing = false;
+let lastTypingTime;
+
 $(document).ready(() => {
   socket.emit('join room', chatId);
+  socket.on('typing', () => $('.typingDots').show());
+  socket.on('stop typing', () => $('.typingDots').hide());
 
   $.get(`/api/chats/${chatId}`, (data) => {
     $('#chatName').text(getChatName(data));
@@ -44,8 +49,33 @@ $('#chatNameButton').click(() => {
   });
 });
 
+const updateTyping = () => {
+  if (!connected) return;
+
+  if (!typing) {
+    typing = true;
+    socket.emit('typing', chatId);
+  }
+
+  lastTypingTime = new Date().getTime();
+
+  let timerLength = 2000;
+
+  setTimeout(() => {
+    let timeNow = new Date().getTime();
+    let timeDiff = timeNow - lastTypingTime;
+
+    if (timeDiff >= timerLength && typing) {
+      socket.emit('stop typing', chatId);
+      typing = false;
+    }
+  }, timerLength);
+};
+
 // event listener for if user press enter key to send message
 $('.messageInputTextBox').keydown((event) => {
+  updateTyping();
+
   if (event.which === 13) {
     submitMessage();
     return false;
@@ -54,6 +84,7 @@ $('.messageInputTextBox').keydown((event) => {
 
 // event listener for if user click on send button to send message
 $('.sendMessageButton').click(() => {
+  updateTyping();
   submitMessage();
 });
 
@@ -62,6 +93,8 @@ const submitMessage = () => {
   if (content) {
     sendMessage(content);
     $('.messageInputTextBox').val('');
+    socket.emit('stop typing', chatId);
+    typing = false;
   }
 };
 
@@ -73,6 +106,10 @@ const sendMessage = (content) => {
       return;
     }
     addChatMessageHtml(data);
+
+    if (connected) {
+      socket.emit('new message', data);
+    }
   });
 };
 

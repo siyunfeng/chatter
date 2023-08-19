@@ -6,3 +6,4 @@ const socket = io(`http://localhost:${port}`);
 socket.emit('setup', loggedInUser);
 
 socket.on('connected', () => (connected = true));
+socket.on('message received', (newMessage) => messageReceived(newMessage));

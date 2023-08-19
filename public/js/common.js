@@ -703,3 +703,10 @@ const getUsersToChatWith = (users) => {
   let usersList = users.filter((user) => user._id !== loggedInUser._id);
   return usersList;
 };
+
+const messageReceived = (newMessage) => {
+  if ($('.chatContainer').length === 0) {
+  } else {
+    addChatMessageHtml(newMessage);
+  }
+};
