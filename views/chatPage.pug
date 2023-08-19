@@ -19,6 +19,9 @@ block content
                 .chatContainer(style='visibility: hidden')
                     ul.chatMessages
 
+                    .typingDots 
+                        img(src='/images/typingDots.gif', alt='typing...')
+
                     .footer 
                         textarea.messageInputTextBox(name='messageInput', placeholder='Type a message...')
                         button.sendMessageButton 

@@ -94,6 +94,10 @@ nav a:hover {
     height: 100%;
 }
 
+ul {
+    margin: 0;
+}
+
 input,
 textarea {
     outline: none;
@@ -658,10 +662,6 @@ img {
     background-color: transparent;
 }
 
-.chatContainer ul {
-    margin: 0;
-}
-
 .chatMessages {
     display: flex;
     flex-direction: column;
@@ -727,12 +727,22 @@ img {
     align-items: flex-start;
 }
 
-.chatMessages .message .messageBody {
+.chatMessages .message .messageBody,
+.typingDots img {
     font-size: 15px;
     background-color: var(--greyLight);
     padding: 6px 12px;
     border-radius: 15px;
     margin: 0 0 5px 0;
+}
+
+.typingDots {
+    display: none;
+    padding: 0 var(--spacingEdge);
+}
+
+.typingDots img {
+    height: 35px;
 }
 
 .chatMessages .message.msgFromMine {
