@@ -4,6 +4,7 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const User = require('../../models/UserModel');
 const Post = require('../../models/PostModel');
+const Notification = require('../../models/NotificationModel');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -90,6 +91,16 @@ router.post('/', async (req, res, next) => {
     let newPost = await Post.create(postData);
     if (newPost) {
       newPost = await User.populate(newPost, { path: 'postedBy' });
+      newPost = await Post.populate(newPost, { path: 'replyTo' });
+
+      if (newPost.replyTo !== undefined) {
+        await Notification.insertNotification(
+          newPost.replyTo.postedBy,
+          req.session.user._id,
+          'reply',
+          newPost._id
+        );
+      }
       res.status(201).send(newPost);
     }
   } catch (error) {
@@ -120,6 +131,15 @@ router.put('/:id/like', async (req, res, next) => {
       { [option]: { likes: userId } },
       { new: true }
     );
+
+    if (!isLiked) {
+      await Notification.insertNotification(
+        post.postedBy,
+        userId,
+        'postLike',
+        post._id
+      );
+    }
 
     return res.status(200).send(post);
   } catch (error) {
@@ -157,6 +177,15 @@ router.post('/:id/repost', async (req, res, next) => {
       { [option]: { repostedBy: userId } },
       { new: true }
     );
+
+    if (!deletedPost) {
+      await Notification.insertNotification(
+        post.postedBy,
+        userId,
+        'repost',
+        post._id
+      );
+    }
 
     return res.status(200).send(post);
   } catch (error) {
