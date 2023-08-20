@@ -164,6 +164,8 @@ img {
     width: 100%;
     border-radius: 50%;
     background-color: white;
+    border: 1px solid var(--greyLight);
+    box-shadow: 2px 2px 2px 1px rgba(128, 128, 128, 0.15), 3px 3px 3px 2px rgba(128, 128, 128, 0.1);
 }
 
 .textareaContainer {
@@ -328,7 +330,7 @@ img {
 }
 
 .profileHeaderContainer .userImageContainer img {
-    border: 3px solid white;
+    border: 2px solid var(--greyLight);
     box-shadow: 3px 3px 2px 1px rgba(128, 128, 128, 0.15), 5px 5px 3px 2px rgba(128, 128, 128, 0.1);
 }
 
@@ -598,7 +600,7 @@ img {
     position: absolute;
     bottom: 0;
     margin: 0;
-    border: 1px solid white;
+    border: 1px solid var(--greyLight);
     border-radius: 50%;
 }
 
@@ -681,7 +683,7 @@ img {
     width: 40px;
     height: 40px;
     background-color: white;
-    border: 1px solid white;
+    border: 1px solid var(--greyLight);
     margin: 0 -10px 0 0;
     border-radius: 50%;
     box-shadow: 2px 2px 2px 1px rgba(128, 128, 128, 0.15), 3px 3px 3px 2px rgba(128, 128, 128, 0.1);
@@ -695,7 +697,7 @@ img {
     height: 40px;
     font-size: 14px;
     background-color: var(--greyLine);
-    border: 1px solid white;
+    border: 1px solid var(--greyLight);
     border-radius: 50%;
 }
 
@@ -770,7 +772,7 @@ img {
     width: 100%;
     height: 100%;
     vertical-align: bottom;
-    border: 1px solid white;
+    border: 1px solid var(--greyLight);
     background-color: white;
     border-radius: 50%;
     box-shadow: 2px 2px 2px 1px rgba(128, 128, 128, 0.15), 3px 3px 3px 2px rgba(128, 128, 128, 0.1);
