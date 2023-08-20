@@ -12,6 +12,26 @@ const NotificationModel = new Schema(
   { timestamps: true }
 );
 
+NotificationModel.statics.insertNotification = async (
+  toUser,
+  fromUser,
+  notificationType,
+  entityId
+) => {
+  let data = {
+    toUser,
+    fromUser,
+    notificationType,
+    entityId,
+  };
+  try {
+    await Notification.deleteOne(data);
+    return Notification.create(data);
+  } catch (error) {
+    console.log('Notification.static.insertNotification error: ', error);
+  }
+};
+
 const Notification = model('Notification', NotificationModel);
 
 module.exports = Notification;
