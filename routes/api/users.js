@@ -8,6 +8,7 @@ const path = require('path');
 const fs = require('fs');
 const User = require('../../models/UserModel');
 const Post = require('../../models/PostModel');
+const Notification = require('../../models/NotificationModel');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -59,6 +60,15 @@ router.put('/:userId/follow', async (req, res, next) => {
     await User.findByIdAndUpdate(userId, {
       [option]: { followers: req.session.user._id },
     });
+
+    if (!isFollowing) {
+      await Notification.insertNotification(
+        userId,
+        req.session.user._id,
+        'follow',
+        req.session.user._id
+      );
+    }
 
     res.status(200).send(req.session.user);
   } catch (error) {
