@@ -6,6 +6,7 @@ const User = require('../../models/UserModel');
 const Post = require('../../models/PostModel');
 const Chat = require('../../models/ChatModel');
 const Message = require('../../models/MessageModel');
+const Notification = require('../../models/NotificationModel');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -30,7 +31,11 @@ router.post('/', async (req, res, next) => {
     message = await message.populate('chat');
     message = await User.populate(message, { path: 'chat.users' });
 
-    await Chat.findByIdAndUpdate(chatId, { latestMessage: message });
+    const chat = await Chat.findByIdAndUpdate(chatId, {
+      latestMessage: message,
+    });
+
+    insertNotifications(chat, message);
 
     res.status(201).send(message);
   } catch (error) {
@@ -38,5 +43,18 @@ router.post('/', async (req, res, next) => {
     res.sendStatus(400);
   }
 });
+
+const insertNotifications = (chat, message) => {
+  chat.users.forEach((userId) => {
+    if (userId != message.sender._id.toString()) {
+      Notification.insertNotification(
+        userId,
+        message.sender._id,
+        'newMessage',
+        message.chat._id
+      );
+    }
+  });
+};
 
 module.exports = router;
