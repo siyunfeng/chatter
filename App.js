@@ -52,11 +52,13 @@ const postsAPIRoute = require('./routes/api/posts');
 const usersAPIRoute = require('./routes/api/users');
 const chatsAPIRoute = require('./routes/api/chats');
 const messagesAPIRoute = require('./routes/api/messages');
+const notificationsAPIRoute = require('./routes/api/notifications');
 
 app.use('/api/posts', postsAPIRoute);
 app.use('/api/users', usersAPIRoute);
 app.use('/api/chats', chatsAPIRoute);
 app.use('/api/messages', messagesAPIRoute);
+app.use('/api/notifications', notificationsAPIRoute);
 
 app.get('/', requireLogin, (req, res, next) => {
   const payload = {
