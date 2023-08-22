@@ -11,11 +11,11 @@
     --greyText: #82807F;
     --blackLight: #212121;
     --blackTransparent: #21212175;
-    --redCarol: #F95450;
-    --pink: #f953501f;
+    --red: #FF0000;
+    --pink: #FF000018;
     --greenLime: #66930C;
     --greenMint: #D1ECB6;
-    --greenLight: #7fa4341a;
+    --greenLight: #7fA4341A;
     --spacingEdge: 1rem;
     --fontArvo: 'Arvo';
     --fontBonaNova: 'Bona Nova';
@@ -62,10 +62,15 @@ nav {
     height: 100%;
 }
 
+nav.col-2 {
+    margin: 5px auto;
+}
+
 nav a {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
     color: var(--blackLight);
     padding: 10px;
     font-size: 30px;
@@ -81,6 +86,29 @@ nav a:hover {
     background-color: var(--blueHoverBg);
     color: var(--blue);
     border-radius: 50%;
+}
+
+#notificationsBadge,
+#messagesBadge {
+    visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 6px;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    color: white;
+    background-color: var(--red);
+    border-radius: 50%;
+    box-shadow: 2px 2px 2px 1px rgba(128, 128, 128, 0.15), 3px 3px 3px 2px rgba(128, 128, 128, 0.1);
+}
+
+#notificationsBadge.active,
+#messagesBadge.active {
+    visibility: visible;
 }
 
 .wrapper {
@@ -271,12 +299,12 @@ img {
 }
 
 .postButtonContainer.red button:hover {
-    color: var(--redCarol);
+    color: var(--red);
     background-color: var(--pink);
 }
 
 .postButtonContainer.red button.active {
-    color: var(--redCarol);
+    color: var(--red);
 }
 
 .postButtonContainer.green button:hover {
@@ -466,7 +494,7 @@ img {
 }
 
 .pinButton.pinned {
-    color: var(--redCarol);
+    color: var(--red);
 }
 
 .pinnedPostText {
