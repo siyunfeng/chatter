@@ -33,6 +33,22 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+router.get('/latest', async (req, res, next) => {
+  try {
+    let newNotification = await Notification.findOne({
+      toUser: req.session.user._id,
+    })
+      .populate('toUser')
+      .populate('fromUser')
+      .sort({ createdAt: -1 });
+
+    res.status(200).send(newNotification);
+  } catch (error) {
+    console.log('/api/notifications route GET request error: ', error);
+    res.sendStatus(400);
+  }
+});
+
 // update notification as read
 router.put('/:id/read', async (req, res, next) => {
   try {

@@ -47,6 +47,7 @@ $('#submitPostButton, #submitReplyButton').click((event) => {
 
   $.post('/api/posts', data, (postData) => {
     if (postData.replyTo) {
+      emitNotification(postData.replyTo.postedBy);
       location.reload();
     } else {
       const html = createPostHtml(postData);
@@ -306,6 +307,7 @@ $(document).on('click', '.likeButton', (event) => {
       // access loggedInUser from main-layout.pug script
       if (postData.likes.includes(loggedInUser._id)) {
         button.addClass('active');
+        emitNotification(postData.postedBy);
       } else {
         button.removeClass('active');
       }
@@ -325,6 +327,7 @@ $(document).on('click', '.repostButton', (event) => {
 
     if (postData.repostedBy.includes(loggedInUser._id)) {
       button.addClass('active');
+      emitNotification(postData.postedBy);
     } else {
       button.removeClass('active');
     }
@@ -358,6 +361,7 @@ $(document).on('click', '.followButton', (event) => {
       if (loggedInUser.followings?.includes(userId)) {
         button.addClass('following');
         button.text('Following');
+        emitNotification(userId);
       } else {
         button.removeClass('following');
         button.text('Follow');
