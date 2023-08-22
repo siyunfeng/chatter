@@ -4,6 +4,8 @@ $(document).ready(() => {
   });
 });
 
+$('#markNotificationAsRead').click(() => markNotificationAsRead());
+
 const outputNotificationList = (notifications, container) => {
   notifications.forEach((notification) => {
     let html = createNotificationHtml(notification);

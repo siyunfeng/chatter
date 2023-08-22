@@ -35,7 +35,28 @@ router.put('/:id/read', async (req, res, next) => {
 
     res.sendStatus(204);
   } catch (error) {
-    console.log('/api/notifications route PUT request error: ', error);
+    console.log(
+      '/api/notifications route specific notification PUT request error: ',
+      error
+    );
+    res.sendStatus(400);
+  }
+});
+
+// update all notifications as read
+router.put('/read', async (req, res, next) => {
+  try {
+    await Notification.updateMany(
+      { toUser: req.session.user._id },
+      { read: true }
+    );
+
+    res.sendStatus(204);
+  } catch (error) {
+    console.log(
+      '/api/notifications route all notifications PUT request error: ',
+      error
+    );
     res.sendStatus(400);
   }
 });

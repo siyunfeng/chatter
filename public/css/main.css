@@ -805,3 +805,7 @@ img {
 .resultListItem.notification * {
     pointer-events: none;
 }
+
+#markNotificationAsRead {
+    padding: 0;
+}
