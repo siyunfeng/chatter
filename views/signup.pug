@@ -13,8 +13,9 @@ block content
             input#password(type="password", name="password", placeholder="Password", required="")
             input#passwordConfirm(type="password", name="passwordConfirm", placeholder="Comfirm Password", required="")
             input(type="submit", value="sign up")
-        p Already have an account?  
-            a(href="/login") Login here.
+        .loginSignupOptions Already have an account?  
+        a(href="/login") 
+            button Login
     
     script.
         let password = document.getElementById('password')
