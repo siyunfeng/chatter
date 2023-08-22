@@ -793,3 +793,15 @@ img {
 .loadingSpinnerContainer img {
     width: 100px;
 }
+
+.resultListItem.notification {
+    padding: 8px var(--spacingEdge);
+}
+
+.resultListItem.active {
+    background-color: var(--blueHoverBg);
+}
+
+.resultListItem.notification * {
+    pointer-events: none;
+}

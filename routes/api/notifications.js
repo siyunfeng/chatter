@@ -27,4 +27,17 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+// update notification as read
+router.put('/:id/read', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await Notification.findByIdAndUpdate(id, { read: true });
+
+    res.sendStatus(204);
+  } catch (error) {
+    console.log('/api/notifications route PUT request error: ', error);
+    res.sendStatus(400);
+  }
+});
+
 module.exports = router;

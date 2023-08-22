@@ -16,10 +16,13 @@ const outputNotificationList = (notifications, container) => {
 };
 
 const createNotificationHtml = (notification) => {
-  const { fromUser } = notification;
+  const { fromUser, read, _id } = notification;
+  const readClass = read ? '' : 'active';
+
   const text = getNotificationText(notification);
   const redirectURL = getNotificationURL(notification);
-  return `<a href=${redirectURL} class='resultListItem notification'>
+
+  return `<a href=${redirectURL} class='resultListItem notification ${readClass}' data-id='${_id}'>
             <div class='resultsImageContainer'>
                 <img src=${fromUser.profileImage} />
             </div>

@@ -368,6 +368,18 @@ $(document).on('click', '.followButton', (event) => {
   });
 });
 
+// click on the notification to mark it as read
+$(document).on('click', '.notification.active', (event) => {
+  const container = $(event.target);
+  const notificationId = container.data().id;
+  const href = container.attr('href');
+
+  event.preventDefault();
+
+  const callback = () => (window.location = href);
+  markNotificationAsRead(notificationId, callback);
+});
+
 // Get post id from elements function
 const getPostIdFromElement = (element) => {
   const isRoot = element.hasClass('post');
@@ -709,4 +721,17 @@ const messageReceived = (newMessage) => {
   } else {
     addChatMessageHtml(newMessage);
   }
+};
+
+const markNotificationAsRead = (notificationId = null, callback = null) => {
+  if (callback === null) {
+    callback = () => location.reload();
+  }
+
+  let url =
+    notificationId !== null
+      ? `/api/notifications/${notificationId}/read`
+      : `/api/notifications/read`;
+
+  $.ajax({ url, type: 'PUT', success: () => callback() });
 };
