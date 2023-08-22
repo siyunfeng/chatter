@@ -798,13 +798,13 @@ const getNotificationText = (notification) => {
 
   switch (notificationType) {
     case 'repost':
-      text = `${fromUserName} reposted one of your posts`;
+      text = `${fromUserName} reposted your post`;
       break;
     case 'postLike':
-      text = `${fromUserName} liked one of your posts`;
+      text = `${fromUserName} liked your post`;
       break;
     case 'reply':
-      text = `${fromUserName} replied to one of your posts`;
+      text = `${fromUserName} replied to your post`;
       break;
     case 'follow':
       text = `${fromUserName} followed you`;
@@ -827,4 +827,12 @@ const getNotificationURL = (notification) => {
   } else if (notificationType === 'follow') {
     return (url = `/profile/${fromUser.username}`);
   }
+};
+
+const notificationPopup = (data) => {
+  const html = createNotificationHtml(data);
+  const element = $(html);
+  element.hide().prependTo('#notificationList').slideDown('fast');
+
+  setTimeout(() => element.fadeOut(600), 5000);
 };

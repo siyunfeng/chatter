@@ -289,13 +289,13 @@ img {
 }
 
 .postFooter .postButtonContainer button {
-    padding: auto;
+    padding: auto 5px;
 }
 
 .postButtonContainer button:hover {
     background-color: var(--blueHoverBg);
     color: var(--blue);
-    border-radius: 50%;
+    border-radius: 40px;
 }
 
 .postButtonContainer.red button:hover {
@@ -836,4 +836,19 @@ img {
 
 #markNotificationAsRead {
     padding: 0;
+}
+
+#notificationList {
+    position: fixed;
+    width: 380px;
+    top: 5px;
+    right: 5px;
+    background-color: white;
+    box-shadow: 0 1px 4px var(--greyLine);
+    -webkit-box-shadow: 0 1px 4px var(--greyLine);
+    -moz-box-shadow: 0 1px 4px var(--greyLine);
+}
+
+#notificationList .active {
+    background-color: white;;
 }
