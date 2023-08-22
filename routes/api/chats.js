@@ -45,6 +45,14 @@ router.get('/', async (req, res, next) => {
       .populate('latestMessage')
       .sort({ updatedAt: -1 });
 
+    if (req.query.unreadOnly !== undefined && req.query.unreadOnly === true) {
+      newChat = newChat.filter(
+        (chat) =>
+          chat.latestMessage &&
+          !chat.latestMessage.readBy.includes(req.session.user._id)
+      );
+    }
+
     newChat = await User.populate(newChat, { path: 'latestMessage.sender' });
 
     res.status(200).send(newChat);

@@ -3,6 +3,11 @@ let cropper;
 let timer;
 let usersOptions = [];
 
+$(document).ready(() => {
+  updateBadge('notifications');
+  updateBadge('messages');
+});
+
 // New post/reply editing & submit button interaction
 $('#postTextarea, #replyTextarea').keyup((event) => {
   const textbox = $(event.target);
@@ -721,6 +726,8 @@ const messageReceived = (newMessage) => {
   } else {
     addChatMessageHtml(newMessage);
   }
+
+  updateBadge('messages');
 };
 
 const markNotificationAsRead = (notificationId = null, callback = null) => {
@@ -734,4 +741,15 @@ const markNotificationAsRead = (notificationId = null, callback = null) => {
       : `/api/notifications/read`;
 
   $.ajax({ url, type: 'PUT', success: () => callback() });
+};
+
+const updateBadge = (badgeType) => {
+  let apiPath = badgeType === 'notifications' ? 'notifications' : 'chats';
+  $.get(`/api/${apiPath}`, { unreadOnly: true }, (data) => {
+    if (data.length > 0) {
+      $(`#${badgeType}Badge`).text(data.length).addClass('active');
+    } else {
+      $(`#${badgeType}Badge`).text('').removeClass('active');
+    }
+  });
 };

@@ -12,10 +12,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 router.get('/', async (req, res, next) => {
   try {
-    let newNotification = await Notification.find({
+    let search = {
       toUser: req.session.user._id,
       notificationType: { $ne: 'newMessage' },
-    })
+    };
+
+    if (req.query.unreadOnly !== undefined && req.query.unreadOnly === true) {
+      search.read = false;
+    }
+
+    let newNotification = await Notification.find(search)
       .populate('toUser')
       .populate('fromUser')
       .sort({ createdAt: -1 });
