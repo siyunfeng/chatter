@@ -726,7 +726,7 @@ const getUsersToChatWith = (users) => {
 };
 
 const messageReceived = (newMessage) => {
-  if ($('.chatContainer').length === 0) {
+  if ($(`[data-room=${newMessage.chat._id}]`).length === 0) {
     messagePopup(newMessage);
   } else {
     addChatMessageHtml(newMessage);
@@ -752,7 +752,9 @@ const markNotificationAsRead = (notificationId = null, callback = null) => {
 
 const updateBadge = (badgeType) => {
   let apiPath = badgeType === 'notifications' ? 'notifications' : 'chats';
+
   $.get(`/api/${apiPath}`, { unreadOnly: true }, (data) => {
+    console.log(`${badgeType} badge amount: `, data.length);
     if (data.length > 0) {
       $(`#${badgeType}Badge`).text(data.length).addClass('active');
     } else {
@@ -859,7 +861,13 @@ const createChatHtml = (chatData) => {
   let chatImage = getChatImageElements(chatData);
   let latestMessage = getLatestMessage(chatData.latestMessage);
 
-  return `<a href='/messages/${chatData._id}' class='resultListItem'>
+  let activeClass =
+    !chatData.latestMessage ||
+    chatData.latestMessage.readBy.includes(loggedInUser._id)
+      ? ''
+      : 'active';
+
+  return `<a href='/messages/${chatData._id}' class='resultListItem ${activeClass}'>
             ${chatImage}
             <div class='resultsDetailsContainer ellipsis'>
               <span class='heading ellipsis'>${chatName}</span>

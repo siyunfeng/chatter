@@ -30,7 +30,7 @@ router.post('/', async (req, res, next) => {
     let newChat = await Chat.create(chatData);
     res.status(200).send(newChat);
   } catch (error) {
-    console.log('chats route POST request error: ', error);
+    console.log('/api//api/chats route POST request error: ', error);
     res.sendStatus(400);
   }
 });
@@ -45,7 +45,7 @@ router.get('/', async (req, res, next) => {
       .populate('latestMessage')
       .sort({ updatedAt: -1 });
 
-    if (req.query.unreadOnly !== undefined && req.query.unreadOnly === true) {
+    if (req.query.unreadOnly !== undefined && req.query.unreadOnly == true) {
       newChat = newChat.filter(
         (chat) =>
           chat.latestMessage &&
@@ -57,7 +57,7 @@ router.get('/', async (req, res, next) => {
 
     res.status(200).send(newChat);
   } catch (error) {
-    console.log('chats route GET request error: ', error);
+    console.log('/api/chats route GET request error: ', error);
     res.sendStatus(400);
   }
 });
@@ -75,7 +75,7 @@ router.get('/:chatId', async (req, res, next) => {
     res.status(200).send(chat);
   } catch (error) {
     console.log(
-      'chats route specific chat(chat name) GET request error: ',
+      '/api/chats route specific chat(chat name) GET request error: ',
       error
     );
     res.sendStatus(400);
@@ -90,7 +90,7 @@ router.put('/:chatId', async (req, res, next) => {
     await Chat.findByIdAndUpdate(chatId, req.body);
     res.sendStatus(204);
   } catch (error) {
-    console.log('chats route update chat name PUT request error: ', error);
+    console.log('/api/chats route update chat name PUT request error: ', error);
     res.sendStatus(400);
   }
 });
@@ -105,7 +105,29 @@ router.get('/:chatId/messages', async (req, res, next) => {
     res.status(200).send(chatContent);
   } catch (error) {
     console.log(
-      'chats route specific chat(chat messages) GET request error: ',
+      '/api/chats route specific chat(chat messages) GET request error: ',
+      error
+    );
+    res.sendStatus(400);
+  }
+});
+
+// mark all messages as read
+router.put('/:chatId/messages/read', async (req, res, next) => {
+  try {
+    const { chatId } = req.params;
+
+    await Message.updateMany(
+      { chat: chatId },
+      { $addToSet: { readBy: req.session.user._id } }
+    );
+
+    const chat = await Chat.findById(chatId);
+    console.log('mark as read, ', chat);
+    res.sendStatus(204);
+  } catch (error) {
+    console.log(
+      '/api/chats route all messages from same chat mark as read PUT request error: ',
       error
     );
     res.sendStatus(400);
