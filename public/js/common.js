@@ -727,6 +727,7 @@ const getUsersToChatWith = (users) => {
 
 const messageReceived = (newMessage) => {
   if ($('.chatContainer').length === 0) {
+    messagePopup(newMessage);
   } else {
     addChatMessageHtml(newMessage);
   }
@@ -833,6 +834,18 @@ const getNotificationURL = (notification) => {
 
 const notificationPopup = (data) => {
   const html = createNotificationHtml(data);
+  const element = $(html);
+  element.hide().prependTo('#notificationList').slideDown('fast');
+
+  setTimeout(() => element.fadeOut(600), 5000);
+};
+
+const messagePopup = (data) => {
+  if (!data.chat.latestMessage._id) {
+    data.chat.latestMessage = data;
+  }
+
+  const html = createChatHtml(data.chat);
   const element = $(html);
   element.hide().prependTo('#notificationList').slideDown('fast');
 
