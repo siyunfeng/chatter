@@ -5,6 +5,7 @@
   "main": "App.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm start",
     "start": "node App.js"
   },
   "author": "Siyun Feng",
