@@ -17,7 +17,7 @@ router.get('/', async (req, res, next) => {
       notificationType: { $ne: 'newMessage' },
     };
 
-    if (req.query.unreadOnly !== undefined && req.query.unreadOnly === true) {
+    if (req.query.unreadOnly) {
       search.read = false;
     }
 

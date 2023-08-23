@@ -754,7 +754,6 @@ const updateBadge = (badgeType) => {
   let apiPath = badgeType === 'notifications' ? 'notifications' : 'chats';
 
   $.get(`/api/${apiPath}`, { unreadOnly: true }, (data) => {
-    console.log(`${badgeType} badge amount: `, data.length);
     if (data.length > 0) {
       $(`#${badgeType}Badge`).text(data.length).addClass('active');
     } else {

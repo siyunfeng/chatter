@@ -45,7 +45,7 @@ router.get('/', async (req, res, next) => {
       .populate('latestMessage')
       .sort({ updatedAt: -1 });
 
-    if (req.query.unreadOnly !== undefined && req.query.unreadOnly == true) {
+    if (req.query.unreadOnly) {
       newChat = newChat.filter(
         (chat) =>
           chat.latestMessage &&
@@ -122,8 +122,6 @@ router.put('/:chatId/messages/read', async (req, res, next) => {
       { $addToSet: { readBy: req.session.user._id } }
     );
 
-    const chat = await Chat.findById(chatId);
-    console.log('mark as read, ', chat);
     res.sendStatus(204);
   } catch (error) {
     console.log(
