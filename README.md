@@ -4,7 +4,7 @@ Chatter is a Twitter clone app that I built as a solo project to learn MongoDB, 
 
 #
 
-## 🛠️ Languages and Tools:
+### 🛠️ Languages and Tools:
 
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)&nbsp;
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black&style=for-the-badge)&nbsp;
