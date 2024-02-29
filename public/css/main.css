@@ -1,859 +1,864 @@
-@import url('https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Bona+Nova:wght@400;700&family=Libre+Franklin:wght@400;700&family=Borel&family=Quicksand:wght@400;700&family=Urbanist&family=Figtree&family=Roboto:wght@400;700&family=Ubuntu:wght@400;700&family=Ysabeau+Infant:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Libre+Franklin:wght@400;700&family=Quicksand:wght@400;700&family=Roboto:wght@400;700&family=Ubuntu:wght@400;700&display=swap');
 
 :root {
-    --blue: rgb(88, 166, 255);
-    --blueDark: rgb(28, 134, 255);
-    --blueHoverBg: rgb(88, 166, 255, 0.15);
-    --blueLight: #9BD1F9;
-    --yellow: #FFDE0A;
-    --greyLine: #DBDCDA;
-    --greyLight: #F1F0F0;
-    --greyText: #82807F;
-    --blackLight: #212121;
-    --blackTransparent: #21212175;
-    --red: #FF0000;
-    --pink: #FF000018;
-    --greenLime: #66930C;
-    --greenMint: #D1ECB6;
-    --greenLight: #7fA4341A;
-    --spacingEdge: 1rem;
-    --fontArvo: 'Arvo';
-    --fontBonaNova: 'Bona Nova';
-    --fontLibreFranklin: 'Libre Franklin';
-    --fontUbuntu: 'Ubuntu';
-    --fontQuicksand: 'Quicksand';
-    --fontYsabeauInfant: 'Ysabeau Infant';
-    --fontRoboto: 'Roboto';
-    --fontBorel: 'Borel';
-    --fontUrbanist: 'Urbanist';
-    --fontFigtree: 'Figtree';
+  --blue: rgb(88, 166, 255);
+  --blueDark: #2f76dc;
+  --blueHoverBg: rgb(88, 166, 255, 0.15);
+  --blueLight: #b9eff8;
+  --yellow: #fbc920;
+  --greyLine: #dbdcda;
+  --greyLight: #f1f0f0;
+  --greyText: #82807f;
+  --blackLight: #212121;
+  --blackTransparent: #21212175;
+  --red: #e62c39;
+  --pink: #ff000018;
+  --greenLime: #66930c;
+  --greenMint: #d1ecb6;
+  --greenLight: #7fa4341a;
+  --creamBgColor: moccasin;
+  --spacingEdge: 1rem;
+  --fontArvo: 'Arvo', serif;
+  --fontLibreFranklin: 'Libre Franklin', sans-serif;
+  --fontUbuntu: 'Ubuntu', monospace;
+  --fontQuicksand: 'Quicksand', serif;
+  --fontRoboto: 'Roboto', sans-serif;
 }
 
 html,
 body {
-    font-weight: 300;
-    background-color: white;
-    height: 100%;
-    min-height: 100%;
+  font-weight: 300;
+  background-color: white;
+  height: 100%;
+  min-height: 100%;
 }
 
 * {
-    font-family: var(--fontRoboto), sans-serif;
-    overflow: visible;
-    overflow-wrap: anywhere;
+  font-family: var(--fontRoboto);
+  overflow: visible;
+  overflow-wrap: anywhere;
 }
 
 a {
-    color: inherit;
-    text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 h1 {
-    font-family: var(--fontArvo), serif;
-    font-size: 20px;
-    font-weight: 700;
-    margin: 0;
+  font-family: var(--fontArvo);
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
 }
 
 nav {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
 }
 
-nav.col-2 {
-    margin: 5px auto;
+nav.col-1 {
+  margin: 5px auto;
 }
 
 nav a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    color: var(--blackLight);
-    padding: 10px;
-    font-size: 30px;
-    width: 55px;
-    height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  color: var(--blackLight);
+  padding: 10px;
+  font-size: 30px;
+  width: 55px;
+  height: 55px;
 }
 
 nav a.yellow {
-    color: var(--yellow);
+  color: var(--yellow);
 }
 
 nav a:hover {
-    background-color: var(--blueHoverBg);
-    color: var(--blue);
-    border-radius: 50%;
+  background-color: var(--blueHoverBg);
+  color: var(--blue);
+  border-radius: 50%;
 }
 
 nav span {
-    font-size: 14px;
-    text-align: left;
+  font-size: 14px;
+  text-align: left;
 }
 
 #notificationsBadge,
 #messagesBadge {
-    visibility: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 6px;
-    right: 0;
-    width: 20px;
-    height: 20px;
-    font-size: 12px;
-    color: white;
-    background-color: var(--red);
-    border-radius: 50%;
-    box-shadow: 2px 2px 2px 1px rgba(128, 128, 128, 0.15), 3px 3px 3px 2px rgba(128, 128, 128, 0.1);
+  visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 6px;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  color: white;
+  background-color: var(--red);
+  border-radius: 50%;
+  box-shadow: 2px 2px 2px 1px rgba(128, 128, 128, 0.15),
+    3px 3px 3px 2px rgba(128, 128, 128, 0.1);
 }
 
 #notificationsBadge.active,
 #messagesBadge.active {
-    visibility: visible;
+  visibility: visible;
 }
 
 .wrapper {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .wrapper > .row {
-    margin: 0;
-    height: 100%;
+  margin: 0;
+  height: 100%;
 }
 
 ul {
-    margin: 0;
+  margin: 0;
 }
 
 input,
 textarea {
-    outline: none;
+  outline: none;
 }
 
 button {
-    background-color: transparent;
-    border: none;
-    color: var(--greyText);
+  background-color: transparent;
+  border: none;
+  color: var(--greyText);
 }
 
-button i, 
+button i,
 button span {
-    pointer-events: none;
+  pointer-events: none;
 }
 
 img {
-    overflow: auto;
+  overflow: auto;
 }
 
 /* Main Layout, Home Page */
 
 .mainSectionContainer {
-    padding: 0;
-    border-left: 1px solid var(--greyLine);
-    border-right: 1px solid var(--greyLine);
+  padding: 0;
+  border-left: 1px solid var(--greyLine);
+  border-right: 1px solid var(--greyLine);
 }
 
 .titleContainer {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-    padding: 0 var(--spacingEdge);
-    height: 55px;
-    border-bottom: 1px solid var(--greyLine)
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 0 var(--spacingEdge);
+  height: 55px;
+  border-bottom: 1px solid var(--greyLine);
 }
 
 .titleContainer h1 {
-    flex: 1;
+  flex: 1;
 }
 
 .postFormContainer {
-    display: flex;
-    flex-shrink: 0;
-    padding: var(--spacingEdge);
-    border-bottom: 8px solid var(--blueHoverBg);
+  display: flex;
+  flex-shrink: 0;
+  padding: var(--spacingEdge);
+  border-bottom: 8px solid var(--blueHoverBg);
 }
 
 .modal .postFormContainer {
-    padding: var(--spacingEdge) 0 0 0;
-    border: none;
+  padding: var(--spacingEdge) 0 0 0;
+  border: none;
 }
 
 .modal .post {
-    padding: 0 0 var(--spacingEdge) 0;
+  padding: 0 0 var(--spacingEdge) 0;
 }
 
 .userImageContainer {
-    width: 50px;
-    height: 50px;
+  width: 50px;
+  height: 50px;
 }
 
 .userImageContainer img {
-    width: 100%;
-    border-radius: 50%;
-    background-color: white;
-    border: 1px solid var(--greyLight);
-    box-shadow: 2px 2px 2px 1px rgba(128, 128, 128, 0.15), 3px 3px 3px 2px rgba(128, 128, 128, 0.1);
+  width: 100%;
+  border-radius: 50%;
+  background-color: white;
+  border: 1px solid var(--greyLight);
+  box-shadow: 2px 2px 2px 1px rgba(128, 128, 128, 0.15),
+    3px 3px 3px 2px rgba(128, 128, 128, 0.1);
 }
 
 .textareaContainer {
-    flex: 1;
-    padding: 0 0 0 var(--spacingEdge);
+  flex: 1;
+  padding: 0 0 0 var(--spacingEdge);
 }
 
 .textareaContainer textarea {
-    width: 100%;
-    border: none;
-    resize: none;
-    font-size: 18px;
+  width: 100%;
+  border: none;
+  resize: none;
+  font-size: 18px;
+  background-color: var(--blueHoverBg);
+  box-shadow: 2px 2px 2px var(--greyLine);
 }
 
 #submitPostButton {
-    background-color: var(--blue);
-    color: white;
-    border: none;
-    border-radius: 40px;
-    padding: 8px 16px;
+  background-color: var(--blue);
+  color: white;
+  border: none;
+  border-radius: 40px;
+  padding: 8px 16px;
+  margin: 5px auto 0;
 }
 
 #submitPostButton:disabled,
-#createChatButton:disabled  {
-    color: var(--greyText);
-    background-color: var(--greyLine);
+#createChatButton:disabled {
+  color: var(--greyText);
+  background-color: var(--greyLine);
 }
 
 .post {
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
-    cursor: pointer;
-    padding: var(--spacingEdge);
-    border-bottom: 1px solid var(--greyLine);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  cursor: pointer;
+  padding: var(--spacingEdge);
+  border-bottom: 1px solid var(--greyLine);
 }
 
 .postActionContainer {
-    padding: 0 0 var(--spacingEdge) var(--spacingEdge);
-    font-size: 14px; 
-    color: var(--greyText);
+  padding: 0 0 var(--spacingEdge) var(--spacingEdge);
+  font-size: 14px;
+  color: var(--greyText);
 }
 
 .mainContentContainer {
-    display: flex;
-    flex: 1;
-    overflow-y: hidden;
+  display: flex;
+  flex: 1;
+  overflow-y: hidden;
 }
 
 .postContentContainer {
-    display: flex;
-    flex-direction: column;
-    padding: 0 0 0 var(--spacingEdge);
-    flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 0 var(--spacingEdge);
+  flex: 1;
 }
 
 .postContentContainer .postHeader {
-    display: flex;
+  display: flex;
 }
 
 .postContentContainer .postHeader .postDate {
-    flex: 1;
+  flex: 1;
 }
 
-.username, 
+.username,
 .postDate {
-    color: var(--greyText);
+  color: var(--greyText);
 }
 
 .displayName {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .postHeader a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
-.postHeader a, 
+.postHeader a,
 .postHeader span {
-    padding: 0 5px 0 0;
+  padding: 0 5px 0 0;
 }
 
 .postFooter {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .postFooter .postButtonContainer {
-    display: flex;
-    flex: 1;
-    color: var(--greyText);
-    font-size: 16px;
+  display: flex;
+  flex: 1;
+  color: var(--greyText);
+  font-size: 16px;
 }
 
 .postFooter .postButtonContainer button {
-    padding: auto 5px;
+  padding: auto 5px;
 }
 
 .postButtonContainer button:hover {
-    background-color: var(--blueHoverBg);
-    color: var(--blue);
-    border-radius: 40px;
+  background-color: var(--blueHoverBg);
+  color: var(--blue);
+  border-radius: 40px;
 }
 
 .postButtonContainer.red button:hover {
-    color: var(--red);
-    background-color: var(--pink);
+  color: var(--red);
+  background-color: var(--pink);
 }
 
 .postButtonContainer.red button.active {
-    color: var(--red);
+  color: var(--red);
 }
 
 .postButtonContainer.green button:hover {
-    color: var(--greenLime);
-    background-color: var(--greenLight);
+  color: var(--greenLime);
+  background-color: var(--greenLight);
 }
 
 .postButtonContainer.green button.active {
-    color: var(--greenLime);
+  color: var(--greenLime);
 }
 
 .replyFlag {
-    margin: 0 0 5px 0;
+  margin: 0 0 5px 0;
 }
 
 .replyFlag a {
-    color: var(--blue)
+  color: var(--blue);
 }
 
 .postBody {
-    padding: 5px 0;
+  padding: 5px 0;
 }
 
-.post.largeFont .postBody, 
+.post.largeFont .postBody,
 .post.largeFont .postFooter {
-    font-size: 19px;
-    font-family: var(--fontUbuntu), monospace;
+  font-size: 19px;
+  font-family: var(--fontUbuntu);
 }
 
 /* Profile Page */
 
 .profileNotFoundErrMsg {
-    padding: var(--spacingEdge);
+  padding: var(--spacingEdge);
 }
 
 .coverAndUserImagesContainer {
-    height: 180px;
-    background-color: var(--blueLight);
-    position: relative;
+  height: 180px;
+  background-color: var(--blueLight);
+  position: relative;
 }
 
 .profileHeaderContainer .userImageContainer {
-    width: 130px;
-    height: 130px;
-    margin: 0 0 0 var(--spacingEdge);
-    position: absolute;
-    bottom: -65px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 130px;
+  height: 130px;
+  margin: 0 0 0 var(--spacingEdge);
+  position: absolute;
+  bottom: -65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .profileHeaderContainer .userImageContainer img {
-    border: 2px solid var(--greyLight);
-    box-shadow: 3px 3px 2px 1px rgba(128, 128, 128, 0.15), 5px 5px 3px 2px rgba(128, 128, 128, 0.1);
+  border: 2px solid var(--greyLight);
+  box-shadow: 3px 3px 2px 1px rgba(128, 128, 128, 0.15),
+    5px 5px 3px 2px rgba(128, 128, 128, 0.1);
 }
 
 .profileHeaderContainer .profileButtonsContainer {
-    text-align: right;
-    min-height: 65px;
-    padding: var(--spacingEdge);
+  text-align: right;
+  min-height: 65px;
+  padding: var(--spacingEdge);
 }
 
 .profileButton,
 .followButton {
-    display: inline-block;
-    color: var(--blue);
-    font-weight: bold;
-    padding: 5px 15px;
-    margin: 0 0 0 var(--spacingEdge);
-    border: 1px solid var(--blue);
-    border-radius: 40px;
+  display: inline-block;
+  color: var(--blue);
+  font-weight: bold;
+  padding: 5px 15px;
+  margin: 0 0 0 var(--spacingEdge);
+  border: 1px solid var(--blue);
+  border-radius: 40px;
 }
 
 .profileButton:hover,
 .followButton:hover {
-    background-color: var(--blueHoverBg);
-    border: 1px solid var(--blueHoverBg);
+  background-color: var(--blueHoverBg);
+  border: 1px solid var(--blueHoverBg);
 }
 
 .followButton.following {
-    color: white;
-    background-color: var(--blue);
+  color: white;
+  background-color: var(--blue);
 }
 
 .profileHeaderContainer .userDetailsContainer {
-    display: flex;
-    flex-direction: column;
-    padding: 0.5rem var(--spacingEdge);
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem var(--spacingEdge);
 }
 
 .followersContainer .value {
-    font-weight: bold;
-    margin: 0 5px 0 0;
+  font-weight: bold;
+  margin: 0 5px 0 0;
 }
 
 .followersContainer span:not(.value) {
-    color: var(--greyText);
+  color: var(--greyText);
 }
 
 .followersContainer a {
-    margin: 0 var(--spacingEdge) 0 0;
+  margin: 0 var(--spacingEdge) 0 0;
 }
 
 .followersContainer a:hover {
-    border-bottom: 1px solid var(--greyLine);
+  border-bottom: 1px solid var(--greyLine);
 }
 
 .tabsContainer {
-    display: flex;
-    flex-shrink: 0;
-    border-bottom: 1px solid var(--greyLine);
+  display: flex;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--greyLine);
 }
 
 .tab {
-    display: flex;
-    flex: 1;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    font-weight: bold;
-    color: var(--greyText);
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  font-weight: bold;
+  color: var(--greyText);
 }
 
 .tab:hover {
-    color: var(--blue);
-    background-color: var(--blueHoverBg);
+  color: var(--blue);
+  background-color: var(--blueHoverBg);
 }
 
 .tab.active {
-    color: var(--blue);
-    border-bottom: 2px solid var(--blue);
+  color: var(--blue);
+  border-bottom: 2px solid var(--blue);
 }
 
 .noResults,
 .noPosts {
-    padding: var(--spacingEdge);
+  padding: var(--spacingEdge);
 }
 
 .resultsContainer {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .resultsContainer .user {
-    padding: var(--spacingEdge);
-    display: flex;
-    border-bottom: 1px solid var(--greyLine);
+  padding: var(--spacingEdge);
+  display: flex;
+  border-bottom: 1px solid var(--greyLine);
 }
 
 .user .userDetailsContainer {
-    flex: 1;
-    padding: 0 var(--spacingEdge);
+  flex: 1;
+  padding: 0 var(--spacingEdge);
 }
 
 .profileImageButton,
 .coverImageButton {
-    position: absolute;
-    font-size: 50px;
-    color: white;
-    display: none;
+  position: absolute;
+  font-size: 50px;
+  color: white;
+  display: none;
 }
 
 .userImageContainer:hover .profileImageButton,
 .coverAndUserImagesContainer:hover .coverImageButton {
-    display: block;
+  display: block;
 }
 
 .coverImageContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .coverImageContainer img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 #imagePreview,
 #coverPreview {
-    width: 100%;
-    display: block;
-    max-width: 100%;
+  width: 100%;
+  display: block;
+  max-width: 100%;
 }
 
 .pinButton.pinned {
-    color: var(--red);
+  color: var(--red);
 }
 
 .pinnedPostText {
-    font-size: 13px;
-    color: var(--greyText);
+  font-size: 13px;
+  color: var(--greyText);
 }
 
 .pinnedPostContainter {
-    border-bottom: 3px inset var(--greyLine);
+  border-bottom: 3px inset var(--greyLine);
 }
 
 .searchBarContainer {
-    position: relative;
-    color: var(--greyText);
-    padding: 10px var(--spacingEdge)
+  position: relative;
+  color: var(--greyText);
+  padding: 10px var(--spacingEdge);
 }
 
 .searchBarContainer i {
-    position: absolute;
-    top: 21px;
-    left: 30px;
+  position: absolute;
+  top: 21px;
+  left: 30px;
 }
 
 .searchBarContainer #searchBox {
-    height: 38px;
-    width: 100%;
-    padding: 5px 40px;
-    border-radius: 40px;
-    background-color: var(--blueHoverBg);
-    border: none;
+  height: 38px;
+  width: 100%;
+  padding: 5px 40px;
+  border-radius: 40px;
+  background-color: var(--blueHoverBg);
+  border: none;
 }
 
 /* New Message Page */
 
 .chatPageContainer {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    flex-basis: 0;
-    min-height: 0;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  flex-basis: 0;
+  min-height: 0;
 }
 
 .chatTitleBar {
-    display: flex;
-    align-items: center;
-    min-height: 60px;
-    border-bottom: 1px solid var(--greyLine);
-    padding: var(--spacingEdge);
+  display: flex;
+  align-items: center;
+  min-height: 60px;
+  border-bottom: 1px solid var(--greyLine);
+  padding: var(--spacingEdge);
 }
 
 .chatTitleBar label {
-    margin: 0 10px 0 0;
+  margin: 0 10px 0 0;
 }
 
 #userSearchTextbox {
-    flex: 1;
-    font-weight: 200;
-    min-width: 350px;
-    border: none;
+  flex: 1;
+  font-weight: 200;
+  min-width: 350px;
+  border: none;
 }
 
 #createChatButton {
-    color: white;
-    background-color: var(--blue);
-    padding: 8px 16px;
-    margin: 10px auto;
-    border: none;
-    border-radius: 40px;
+  color: white;
+  background-color: var(--blue);
+  padding: 8px 16px;
+  margin: 10px auto;
+  border: none;
+  border-radius: 40px;
 }
 
 .selectedUser {
-    display: inline-block;
-    font-weight: 200;
-    color: var(--greenLime);
-    background-color: var(--greenMint);
-    padding: 4px 8px;
-    margin: 5px 5px 0 0;
-    border-radius: 5px;
+  display: inline-block;
+  font-weight: 200;
+  color: var(--greenLime);
+  background-color: var(--greenMint);
+  padding: 4px 8px;
+  margin: 5px 5px 0 0;
+  border-radius: 5px;
 }
 
 /* Inbox Page */
 
 .resultListItem {
-    display: flex;
-    flex-shrink: 0;
-    align-items: center;
-    padding: var(--spacingEdge);
-    border-bottom: 1px solid var(--greyLine);
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  padding: var(--spacingEdge);
+  border-bottom: 1px solid var(--greyLine);
 }
 
 .resultListItem:hover {
-    background-color: var(--blueHoverBg);
+  background-color: var(--blueHoverBg);
 }
 
 .resultsDetailsContainer {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .resultsDetailsContainer .heading {
-    font-weight: 500;
+  font-weight: 500;
 }
 
 .resultsDetailsContainer .subText {
-    font-size: 14px;
-    color: var(--greyText);
+  font-size: 14px;
+  color: var(--greyText);
 }
 
 .resultListItem img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    box-shadow: 2px 2px 2px 1px rgba(128, 128, 128, 0.15), 3px 3px 3px 2px rgba(128, 128, 128, 0.1);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: 2px 2px 2px 1px rgba(128, 128, 128, 0.15),
+    3px 3px 3px 2px rgba(128, 128, 128, 0.1);
 }
 
 .resultsImageContainer {
-    display: flex;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    position: relative;
-    padding: 5px;
-    margin: 0 10px 0 0;
+  display: flex;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  padding: 5px;
+  margin: 0 10px 0 0;
 }
 
 .groupChatImage img {
-    width: 65%;
-    height: 65%;
-    background-color: white;
-    position: absolute;
-    bottom: 0;
-    margin: 0;
-    border: 1px solid var(--greyLight);
-    border-radius: 50%;
+  width: 65%;
+  height: 65%;
+  background-color: white;
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  border: 1px solid var(--greyLight);
+  border-radius: 50%;
 }
 
 .groupChatImage img:first-of-type {
-    top: 0;
-    right: 0;
+  top: 0;
+  right: 0;
 }
 
 .ellipsis {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Chat Page */
 
 .chatTitleBarContainer {
-    display: flex;
-    align-items: center;
-    padding: var(--spacingEdge);
-    border-bottom: 1px solid var(--greyLine);
+  display: flex;
+  align-items: center;
+  padding: var(--spacingEdge);
+  border-bottom: 1px solid var(--greyLine);
 }
 
 #chatName {
-    width: 100%;
-    padding: 0 5px;
-    border: 1px solid transparent;
+  width: 100%;
+  padding: 0 5px;
+  border: 1px solid transparent;
 }
 
 #chatName:hover {
-    cursor: text;
-    border: 1px solid var(--greyLine);
+  cursor: text;
+  border: 1px solid var(--greyLine);
 }
 
 .chatContainer {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow-y: hidden;
 }
 
 .chatContainer .footer {
-    display: flex;
-    flex-shrink: 0;
-    padding: var(--spacingEdge);
+  display: flex;
+  flex-shrink: 0;
+  padding: var(--spacingEdge);
 }
 
 .chatContainer .footer textarea {
-    flex: 1;
-    resize: none;
-    background-color: var(--blueHoverBg);
-    border: none;
-    border-radius: 20px;
-    padding: 8px 12px;
-    height: 40px;
+  flex: 1;
+  resize: none;
+  background-color: var(--blueHoverBg);
+  border: none;
+  border-radius: 20px;
+  padding: 8px 12px;
+  height: 40px;
 }
 
 .chatContainer .footer button {
-    font-size: 24px;
-    color: var(--blue);
-    background-color: transparent;
+  font-size: 24px;
+  color: var(--blue);
+  background-color: transparent;
 }
 
 .chatMessages {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    padding: var(--spacingEdge);
-    overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: var(--spacingEdge);
+  overflow-y: auto;
 }
 
 .chatImagesContainer {
-    display: flex;
-    flex-direction: row-reverse;
-    height: 100%;
-    margin: 0 10px 0 0;
+  display: flex;
+  flex-direction: row-reverse;
+  height: 100%;
+  margin: 0 10px 0 0;
 }
 
 .chatImagesContainer img {
-    width: 40px;
-    height: 40px;
-    background-color: white;
-    border: 1px solid var(--greyLight);
-    margin: 0 -10px 0 0;
-    border-radius: 50%;
-    box-shadow: 2px 2px 2px 1px rgba(128, 128, 128, 0.15), 3px 3px 3px 2px rgba(128, 128, 128, 0.1);
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border: 1px solid var(--greyLight);
+  margin: 0 -10px 0 0;
+  border-radius: 50%;
+  box-shadow: 2px 2px 2px 1px rgba(128, 128, 128, 0.15),
+    3px 3px 3px 2px rgba(128, 128, 128, 0.1);
 }
 
 .chatImagesContainer .userCount {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    font-size: 14px;
-    background-color: var(--greyLine);
-    border: 1px solid var(--greyLight);
-    border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  font-size: 14px;
+  background-color: var(--greyLine);
+  border: 1px solid var(--greyLight);
+  border-radius: 50%;
 }
 
 #chatNameTextbox {
-    width: 100%;
-    border: none;
-    padding: 5px 0;
+  width: 100%;
+  border: none;
+  padding: 5px 0;
 }
 
 .chatMessages .message {
-    display: flex;
-    align-items: flex-end;
-    flex-shrink: 0;
-    padding: 0 0 2px 0;
-    list-style: none;
+  display: flex;
+  align-items: flex-end;
+  flex-shrink: 0;
+  padding: 0 0 2px 0;
+  list-style: none;
 }
 
 .chatMessages .message .messageContainer {
-    display: flex;
-    flex-direction: column;
-    max-width: 55%;
+  display: flex;
+  flex-direction: column;
+  max-width: 55%;
 }
 
-.chatMessages .message.msgFromMine .messageContainer{
-    align-items: flex-end;
+.chatMessages .message.msgFromMine .messageContainer {
+  align-items: flex-end;
 }
 
 .chatMessages .message.msgFromOthers .messageContainer {
-    align-items: flex-start;
+  align-items: flex-start;
 }
 
 .chatMessages .message .messageBody,
 .typingDots img {
-    font-size: 15px;
-    background-color: var(--greyLight);
-    padding: 6px 12px;
-    border-radius: 15px;
-    margin: 0 0 5px 0;
+  font-size: 15px;
+  background-color: var(--greyLight);
+  padding: 6px 12px;
+  border-radius: 15px;
+  margin: 0 0 5px 0;
 }
 
 .typingDots {
-    display: none;
-    padding: 0 var(--spacingEdge);
+  display: none;
+  padding: 0 var(--spacingEdge);
 }
 
 .typingDots img {
-    height: 35px;
+  height: 35px;
 }
 
 .chatMessages .message.msgFromMine {
-    display: flex;
-    flex-direction: row-reverse;
+  display: flex;
+  flex-direction: row-reverse;
 }
 
 .chatMessages .message.msgFromMine .messageBody {
-    color: white;
-    background-color: var(--blue);
+  color: white;
+  background-color: var(--blue);
 }
 
 .senderName {
-    color: var(--greyText);
-    font-size: 12px;
+  color: var(--greyText);
+  font-size: 12px;
 }
 
 .chatMessages .imageContainer {
-    width: 30px;
-    height: 30px;
-    margin: 0 6px 6px 0;
+  width: 30px;
+  height: 30px;
+  margin: 0 6px 6px 0;
 }
 
 .chatMessages .imageContainer img {
-    width: 100%;
-    height: 100%;
-    vertical-align: bottom;
-    border: 1px solid var(--greyLight);
-    background-color: white;
-    border-radius: 50%;
-    box-shadow: 2px 2px 2px 1px rgba(128, 128, 128, 0.15), 3px 3px 3px 2px rgba(128, 128, 128, 0.1);
+  width: 100%;
+  height: 100%;
+  vertical-align: bottom;
+  border: 1px solid var(--greyLight);
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 2px 2px 2px 1px rgba(128, 128, 128, 0.15),
+    3px 3px 3px 2px rgba(128, 128, 128, 0.1);
 }
 
 .chatMessages .message.last-message {
-    margin: 0 0 7px 0;
+  margin: 0 0 7px 0;
 }
 
 .loadingSpinnerContainer {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    width: 100%;
-    margin: 50px auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  margin: 50px auto;
 }
 
 .loadingSpinnerContainer img {
-    width: 100px;
+  width: 100px;
 }
 
 .resultListItem.notification {
-    padding: 8px var(--spacingEdge);
+  padding: 8px var(--spacingEdge);
 }
 
 .resultListItem.active {
-    background-color: var(--blueHoverBg);
+  background-color: var(--blueHoverBg);
 }
 
 .resultListItem.notification * {
-    pointer-events: none;
+  pointer-events: none;
 }
 
 #markNotificationAsRead {
-    padding: 0;
+  padding: 0;
 }
 
 #notificationList {
-    position: fixed;
-    width: 380px;
-    top: 5px;
-    right: 5px;
-    background-color: white;
-    box-shadow: 0 1px 4px var(--greyLine);
-    -webkit-box-shadow: 0 1px 4px var(--greyLine);
-    -moz-box-shadow: 0 1px 4px var(--greyLine);
+  position: fixed;
+  width: 380px;
+  top: 5px;
+  right: 5px;
+  background-color: white;
+  box-shadow: 0 1px 4px var(--greyLine);
+  -webkit-box-shadow: 0 1px 4px var(--greyLine);
+  -moz-box-shadow: 0 1px 4px var(--greyLine);
 }
 
 #notificationList .active {
-    background-color: white;;
+  background-color: white;
 }

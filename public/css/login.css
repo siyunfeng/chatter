@@ -1,80 +1,120 @@
-@import url('https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Libre+Franklin&family=Nova+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Libre+Franklin&family=Nova+Mono&family=Anton&family=Archivo+Black&family=League+Spartan:wght@100..900&display=swap');
 
 :root {
-    --rosybrown: rosybrown;
-    --boxShadow: rgba(100,100,100,0.3);
-    --creamBgColor: moccasin;
+  --rosybrown: rosybrown;
+  --boxShadow: rgba(100, 100, 100, 0.3);
+  --creamBgColor: moccasin;
+  --fontArvo: 'Arvo', 'Libre Franklin', serif;
+  --fontNova: 'Nova Mono', 'Libre Franklin', sans-serif;
+  --fontAnton: 'Anton', sans-serif;
+  --fontArchivoBlack: 'Archivo Black', sans-serif;
+  --fontLeagueSpartan: 'League Spartan', sans-serif;
 }
 
 * {
-    font-family: 'Nova Mono', 'Libre Franklin', sans-serif;
+  font-family: var(--fontNova);
 }
 
-h1, h2, h3, h4, h6 {
-    font-family: 'Arvo', 'Libre Franklin', sans-serif;
+h1,
+h2,
+h3,
+h4,
+h6 {
+  font-family: var(--fontArvo);
 }
 
 body {
-    background-color: var(--creamBgColor);
+  background-color: var(--creamBgColor);
 }
 
 .wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+}
+
+.chatter-logo {
+  display: flex;
+  gap: 1rem;
 }
 
 .wrapper img {
-    width: 380px;
-    height: 380px;
-    align-self: center;
-    margin: 20px;
+  width: 80px;
+  margin: 10px auto;
+}
+
+.wrapper .chatter-title {
+  font-family: var(--fontAnton);
+  font-size: 4rem;
+  align-self: center;
+}
+
+.wrapper .slogan {
+  margin: 0 0 0.5rem;
 }
 
 .loginContainer {
-    padding: 20px;
-    width: 80%;
-    max-width: 400px;
-    background-color: #fffcf0;
-    border: 2px solid var(--rosybrown);
-    text-align: center;
-    box-shadow: 3px 5px 10px var(--boxShadow);
-    -webkit-box-shadow: 3px 5px 10px var(--boxShadow);
-    -moz-box-shadow: 3px 5px 10px var(--boxShadow);
+  padding: 20px;
+  width: 80%;
+  max-width: 400px;
+  margin: 1rem auto;
+  background-color: #fffcf0;
+  border: 2px solid var(--rosybrown);
+  text-align: center;
+  box-shadow: 3px 5px 10px var(--boxShadow);
+  -webkit-box-shadow: 3px 5px 10px var(--boxShadow);
+  -moz-box-shadow: 3px 5px 10px var(--boxShadow);
 }
 
 form {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
-input[type='text'], input[type='email'], input[type='password'] {
-    margin: 0 0 20px;
-    padding: 5px 10px;
-    border-radius: 2px;
-    border: 1px solid #dedede;
+input[type='text'],
+input[type='email'],
+input[type='password'] {
+  margin: 0 0 20px;
+  padding: 5px 10px;
+  border-radius: 2px;
+  border: 1px solid #dedede;
 }
 
 input[type='submit'],
 button {
-    width: 100%;
-    margin: 0 0 10px;
-    padding: 5px 10px;
-    background-color: var(--creamBgColor);
-    border: none;
-    border-radius: 50px;
+  width: 100%;
+  margin: 0 0 10px;
+  padding: 5px 10px;
+  background-color: var(--creamBgColor);
+  border: none;
+  border-radius: 50px;
 }
 
 button {
-    background-color: transparent;
-    border: 3px solid var(--creamBgColor);
+  background-color: transparent;
+  border: 3px solid var(--creamBgColor);
 }
 
-p.signupErrMsg, p.loginErrMsg{
-    font-size: 14px;
+p.signupErrMsg,
+p.loginErrMsg {
+  font-size: 14px;
 }
 
 .loginSignupOptions {
-    margin: 15px auto 0;
+  margin: 15px auto 0;
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 14px;
+  margin: 2rem;
+}
+
+.copyright {
+  text-decoration: none;
+  color: inherit;
 }

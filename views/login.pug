@@ -2,13 +2,13 @@ extends layouts/login-layout.pug
 
 block content
     .loginContainer
-        h1 Login
+        h3 Login
         form(method="post")
             p.loginErrMsg #{errorMessage || ''}
 
             input(type="text", name="loginUsernameOrEmail", placeholder="Username or Email", value=loginUsernameOrEmail, required="")
             input(type="password", name="loginPassword", placeholder="Password", value=loginPassword, required="")
-            input(type="submit", value="login")
+            input(type="submit", value="Login")
         .loginSignupOptions Do not have an account? 
             a(href="/signup") 
                 button Sign Up

@@ -16,36 +16,30 @@ html(lang="en")
             const loggedInUser = !{loggedInUserJS} 
         .wrapper
             .row
-                nav.col-2
+                nav.col-1
                     a.yellow(href='/')
                         img(src='/images/chatter-logo.png', alt='logo')
                     a(href='/')
-                        i.fas.fa-house H
-                        //- span Home
+                        i.fas.fa-house
                     a(href='/search')
                         i.fas.fa-magnifying-glass 
-                        //- span Search
                     a(href='/notifications')
                         i.fas.fa-bell 
-                        //- span Notifications
                         span#notificationsBadge
                     a(href='/messages')
                         i.fas.fa-envelope 
-                        //- span Messages
                         span#messagesBadge
                     a(href='/profile')
                         i.fas.fa-user 
-                        //- span Profile
                     a(href='/logout')
                         i.fas.fa-right-from-bracket 
-                        //- span Log Out
-                .mainSectionContainer.col-10.col-md-8.col-lg-6
+                .mainSectionContainer.col-11.col-lg-10
                     .titleContainer
                         h1 #{pageTitle}
                         block headerButton
 
                     block content
-                .d-none.d-md-block.col-md-2.col-lg-4
+                .d-none.d-md-block.col-lg-1
         
         #notificationList
 
